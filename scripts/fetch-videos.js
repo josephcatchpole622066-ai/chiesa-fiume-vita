@@ -77,15 +77,19 @@ function filterSermons(videos) {
       return false;
     }
 
-    // Escludi canti e adorazione
+    // Escludi canti, adorazione e live
     if (
       titleLower.includes("canto") ||
       titleLower.includes("cantico") ||
       titleLower.includes("lode") ||
       titleLower.includes("adorazione") ||
       titleLower.includes("worship") ||
-      titleLower.includes("live") ||
-      titleLower.includes("culto di adorazione")
+      titleLower.includes(" live") ||
+      titleLower.includes("live ") ||
+      titleLower.startsWith("live") ||
+      titleLower.endsWith("live") ||
+      titleLower.includes("culto di adorazione") ||
+      titleLower.includes("grati a dio") // Testimonianze di ringraziamento
     ) {
       return false;
     }
