@@ -53,49 +53,48 @@ async function fetchAllVideos() {
 }
 
 function filterSermons(videos) {
-  return videos.filter((video) => {
-    const titleLower = video.title.toLowerCase();
-    const descLower = video.description.toLowerCase();
-
-    // Escludi shorts (di solito hanno "shorts" nel titolo o descrizione o molti hashtag)
-    if (titleLower.includes("shorts") || titleLower.includes("#shorts")) {
-      return false;
-    }
-
-    // Escludi video con molti hashtag consecutivi (tipico degli shorts)
-    if ((titleLower.match(/#/g) || []).length >= 3) {
-      return false;
-    }
-
-    // Escludi testimonianze
-    if (titleLower.includes("nati di nuovo")) {
-      return false;
-    }
-
-    // Escludi se inizia con hashtag (tipico formato shorts)
-    if (titleLower.trim().startsWith("#")) {
-      return false;
-    }
-
-    // Escludi canti, adorazione e live
-    if (
-      titleLower.includes("canto") ||
-      titleLower.includes("cantico") ||
-      titleLower.includes("lode") ||
-      titleLower.includes("adorazione") ||
-      titleLower.includes("worship") ||
-      titleLower.includes(" live") ||
-      titleLower.includes("live ") ||
-      titleLower.startsWith("live") ||
-      titleLower.endsWith("live") ||
-      titleLower.includes("culto di adorazione") ||
-      titleLower.includes("grati a dio") // Testimonianze di ringraziamento
-    ) {
-      return false;
-    }
-
-    return true;
-  });
+  // Estrai i campi e filtra
+  return videos
+    .filter((video) => {
+      const descLower = video.description.toLowerCase();
+      // INCLUDI SOLO i video che contengono "Predica domenicale" nella descrizione
+      return descLower.includes("predica domenicale");
+    })
+    .map((video) => {
+      // Parsing del titolo: "TITOLO | BRANO | PREDICATORE"
+      const parts = video.title.split("|").map((p) => p.trim());
+      let preacher = "";
+      let scripture = "";
+      let mainTitle = "";
+      if (parts.length === 3) {
+        mainTitle = parts[0];
+        scripture = parts[1];
+        preacher = parts[2];
+      } else if (parts.length === 2) {
+        mainTitle = parts[0];
+        // Se il secondo è un nome, lo metto come preacher
+        if (/^[A-Z][a-z]+( [A-Z][a-z]+)*$/.test(parts[1])) {
+          preacher = parts[1];
+        } else {
+          scripture = parts[1];
+        }
+      } else {
+        mainTitle = video.title;
+      }
+      // Playlist: cerca in descrizione, es: "Playlist: ..." oppure lascia vuoto
+      let playlist = "";
+      const playlistMatch = video.description.match(/playlist: ([^\n]+)/i);
+      if (playlistMatch) {
+        playlist = playlistMatch[1].trim();
+      }
+      return {
+        ...video,
+        mainTitle,
+        preacher,
+        scripture,
+        playlist,
+      };
+    });
 }
 function filterTestimonials(videos) {
   return videos.filter((video) => {
