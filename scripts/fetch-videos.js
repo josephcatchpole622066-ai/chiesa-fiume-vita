@@ -55,28 +55,70 @@ async function fetchAllVideos() {
 function filterSermons(videos) {
   return videos.filter((video) => {
     const titleLower = video.title.toLowerCase();
-    return (
-      !titleLower.includes("nati di nuovo") &&
-      !titleLower.includes("canto") &&
-      !titleLower.includes("cantico") &&
-      !titleLower.includes("lode") &&
-      !titleLower.includes("adorazione") &&
-      !titleLower.includes("worship")
-    );
+    const descLower = video.description.toLowerCase();
+
+    // Escludi shorts (di solito hanno "shorts" nel titolo o descrizione o molti hashtag)
+    if (titleLower.includes("shorts") || titleLower.includes("#shorts")) {
+      return false;
+    }
+
+    // Escludi video con molti hashtag consecutivi (tipico degli shorts)
+    if ((titleLower.match(/#/g) || []).length >= 3) {
+      return false;
+    }
+
+    // Escludi testimonianze
+    if (titleLower.includes("nati di nuovo")) {
+      return false;
+    }
+
+    // Escludi se inizia con hashtag (tipico formato shorts)
+    if (titleLower.trim().startsWith("#")) {
+      return false;
+    }
+
+    // Escludi canti e adorazione
+    if (
+      titleLower.includes("canto") ||
+      titleLower.includes("cantico") ||
+      titleLower.includes("lode") ||
+      titleLower.includes("adorazione") ||
+      titleLower.includes("worship") ||
+      titleLower.includes("live") ||
+      titleLower.includes("culto di adorazione")
+    ) {
+      return false;
+    }
+
+    return true;
   });
 }
-
 function filterTestimonials(videos) {
   return videos.filter((video) => {
     const titleLower = video.title.toLowerCase();
-    return (
-      titleLower.includes("nati di nuovo") &&
-      !titleLower.includes("canto") &&
-      !titleLower.includes("cantico") &&
-      !titleLower.includes("lode") &&
-      !titleLower.includes("adorazione") &&
-      !titleLower.includes("worship")
-    );
+
+    // Deve contenere "nati di nuovo"
+    if (!titleLower.includes("nati di nuovo")) {
+      return false;
+    }
+
+    // Escludi shorts
+    if (titleLower.includes("shorts") || titleLower.includes("#shorts")) {
+      return false;
+    }
+
+    // Escludi canti
+    if (
+      titleLower.includes("canto") ||
+      titleLower.includes("cantico") ||
+      titleLower.includes("lode") ||
+      titleLower.includes("adorazione") ||
+      titleLower.includes("worship")
+    ) {
+      return false;
+    }
+
+    return true;
   });
 }
 
