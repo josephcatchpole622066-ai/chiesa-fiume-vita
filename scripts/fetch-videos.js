@@ -1,6 +1,7 @@
 import fs from "fs";
 
-const API_KEY = "AIzaSyDxL-zPcTV4WyrbejEZ2iNXMORWbSbwySI";
+const API_KEY =
+  process.env.VITE_YOUTUBE_API_KEY || "AIzaSyDxL-zPcTV4WyrbejEZ2iNXMORWbSbwySI";
 const CHANNEL_ID = "UCGdxHNQjIRAQJ66S5bCRJlg";
 
 async function fetchAllVideos() {
@@ -17,7 +18,15 @@ async function fetchAllVideos() {
     const response = await fetch(url);
     const data = await response.json();
 
-    if (!data.items) break;
+    if (data.error) {
+      console.error("API Error:", data.error);
+      throw new Error(data.error.message);
+    }
+
+    if (!data.items) {
+      console.log("No items in response");
+      break;
+    }
 
     const videoIds = data.items.map((item) => item.id.videoId).join(",");
     const statsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds}&part=statistics`;
