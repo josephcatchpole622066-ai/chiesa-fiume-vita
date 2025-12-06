@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getArticles } from '../../data/articlesData';
 import jsPDF from 'jspdf';
 import './ArticleDetail.css';
 
@@ -357,10 +358,17 @@ Questa è la gioia incrollabile di chi ha il proprio fondamento in Cristo. Che p
   }
 };
 
+
 function ArticleDetail() {
   const { articleId } = useParams();
   const navigate = useNavigate();
-  const article = articlesContent[articleId];
+  const [article, setArticle] = useState(null);
+
+  useEffect(() => {
+    const articles = getArticles();
+    const found = articles.find(a => a.id === articleId);
+    setArticle(found);
+  }, [articleId]);
 
   if (!article) {
     return (

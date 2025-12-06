@@ -136,21 +136,23 @@ function SermonsDynamic() {
         )}
 
         <div className="sermons-filters">
-          <div className="filter-group">
-            <label htmlFor="playlist-filter">📚 Playlist:</label>
-            <select
-              id="playlist-filter"
-              value={selectedPlaylist}
-              onChange={(e) => setSelectedPlaylist(e.target.value)}
-              className="filter-select"
-            >
-              {allPlaylists.map(playlist => (
-                <option key={playlist.value} value={playlist.value}>
-                  {playlist.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          {dynamicPlaylists.length > 0 && (
+            <div className="filter-group">
+              <label htmlFor="playlist-filter">📚 Playlist:</label>
+              <select
+                id="playlist-filter"
+                value={selectedPlaylist}
+                onChange={(e) => setSelectedPlaylist(e.target.value)}
+                className="filter-select"
+              >
+                {allPlaylists.map(playlist => (
+                  <option key={playlist.value} value={playlist.value}>
+                    {playlist.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           <div className="filter-group">
             <label htmlFor="preacher-filter">👤 Predicatore:</label>

@@ -4,6 +4,68 @@ const API_KEY =
   process.env.VITE_YOUTUBE_API_KEY || "AIzaSyDxL-zPcTV4WyrbejEZ2iNXMORWbSbwySI";
 const CHANNEL_ID = "UCGdxHNQjIRAQJ66S5bCRJlg";
 
+// Mappa video ID -> nome playlist
+const videoToPlaylistMap = {};
+
+async function fetchChannelPlaylists() {
+  console.log("📚 Fetching channel playlists...");
+  const playlists = [];
+  let nextPageToken = null;
+  
+  do {
+    const url = `https://www.googleapis.com/youtube/v3/playlists?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet&maxResults=50${
+      nextPageToken ? "&pageToken=" + nextPageToken : ""
+    }`;
+    
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (data.error) {
+      console.error("Playlist API Error:", data.error);
+      break;
+    }
+    
+    if (data.items) {
+      playlists.push(...data.items);
+    }
+    
+    nextPageToken = data.nextPageToken;
+  } while (nextPageToken);
+  
+  console.log(`Found ${playlists.length} playlists`);
+  
+  // Per ogni playlist, ottieni i video
+  for (const playlist of playlists) {
+    await fetchPlaylistVideos(playlist.id, playlist.snippet.title);
+  }
+}
+
+async function fetchPlaylistVideos(playlistId, playlistName) {
+  let nextPageToken = null;
+  
+  do {
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?key=${API_KEY}&playlistId=${playlistId}&part=snippet&maxResults=50${
+      nextPageToken ? "&pageToken=" + nextPageToken : ""
+    }`;
+    
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (data.error) {
+      break;
+    }
+    
+    if (data.items) {
+      data.items.forEach(item => {
+        const videoId = item.snippet.resourceId.videoId;
+        videoToPlaylistMap[videoId] = playlistName;
+      });
+    }
+    
+    nextPageToken = data.nextPageToken;
+  } while (nextPageToken);
+}
+
 async function fetchAllVideos() {
   const maxResults = 50;
   let allVideos = [];
@@ -29,21 +91,29 @@ async function fetchAllVideos() {
     }
 
     const videoIds = data.items.map((item) => item.id.videoId).join(",");
-    const statsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds}&part=statistics`;
-    const statsResponse = await fetch(statsUrl);
-    const statsData = await statsResponse.json();
+    
+    // Fetch statistics AND snippet with playlistId
+    const detailsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds}&part=statistics,snippet`;
+    const detailsResponse = await fetch(detailsUrl);
+    const detailsData = await detailsResponse.json();
 
-    const videos = data.items.map((item, index) => ({
-      id: item.id.videoId,
-      title: item.snippet.title,
-      description: item.snippet.description,
-      thumbnail:
-        item.snippet.thumbnails.high?.url ||
-        item.snippet.thumbnails.default.url,
-      publishedAt: item.snippet.publishedAt,
-      embedUrl: `https://www.youtube.com/embed/${item.id.videoId}`,
-      views: parseInt(statsData.items[index]?.statistics?.viewCount || 0),
-    }));
+    const videos = data.items.map((item, index) => {
+      const details = detailsData.items[index];
+      const videoId = item.id.videoId;
+      
+      return {
+        id: videoId,
+        title: item.snippet.title,
+        description: item.snippet.description,
+        thumbnail:
+          item.snippet.thumbnails.high?.url ||
+          item.snippet.thumbnails.default.url,
+        publishedAt: item.snippet.publishedAt,
+        embedUrl: `https://www.youtube.com/embed/${videoId}`,
+        views: parseInt(details?.statistics?.viewCount || 0),
+        playlistId: details?.snippet?.playlistId || "",
+      };
+    });
 
     allVideos = allVideos.concat(videos);
     nextPageToken = data.nextPageToken;
@@ -54,13 +124,13 @@ async function fetchAllVideos() {
 
 function filterSermons(videos) {
   // Estrai i campi e filtra
-  return videos
-    .filter((video) => {
+  const filtered = videos.filter((video) => {
       const descLower = video.description.toLowerCase();
       // INCLUDI SOLO i video che contengono "Predica domenicale" nella descrizione
       return descLower.includes("predica domenicale");
-    })
-    .map((video) => {
+    });
+    
+  const mapped = filtered.map((video) => {
       // Parsing del titolo: "TITOLO | BRANO | PREDICATORE"
       const parts = video.title.split("|").map((p) => p.trim());
       let preacher = "";
@@ -81,20 +151,19 @@ function filterSermons(videos) {
       } else {
         mainTitle = video.title;
       }
-      // Playlist: cerca in descrizione, es: "Playlist: ..." oppure lascia vuoto
-      let playlist = "";
-      const playlistMatch = video.description.match(/playlist: ([^\n]+)/i);
-      if (playlistMatch) {
-        playlist = playlistMatch[1].trim();
-      }
+      // Playlist: usa la mappa video->playlist
+      let playlist = videoToPlaylistMap[video.id] || "";
+      
       return {
         ...video,
         mainTitle,
         preacher,
         scripture,
-        playlist,
+        playlist, // Questo DEVE essere dopo ...video per sovrascrivere
       };
     });
+  
+  return mapped;
 }
 function filterTestimonials(videos) {
   return videos.filter((video) => {
@@ -127,6 +196,10 @@ function filterTestimonials(videos) {
 
 (async () => {
   try {
+    // Prima ottieni le playlist e mappa i video
+    await fetchChannelPlaylists();
+    console.log(`📊 Mapped ${Object.keys(videoToPlaylistMap).length} videos to playlists`);
+    
     console.log("🎬 Fetching all videos from YouTube...");
     const allVideos = await fetchAllVideos();
     console.log(`✅ Total videos fetched: ${allVideos.length}`);
@@ -138,29 +211,29 @@ function filterTestimonials(videos) {
     console.log(`💬 Testimonials: ${testimonials.length}`);
 
     // Crea directory se non esiste
-    if (!fs.existsSync("public/data")) {
-      fs.mkdirSync("public/data", { recursive: true });
+    if (!fs.existsSync("./public/data")) {
+      fs.mkdirSync("./public/data", { recursive: true });
     }
 
     // Salva i dati
     fs.writeFileSync(
-      "public/data/sermons.json",
+      "./public/data/sermons.json",
       JSON.stringify(sermons, null, 2)
     );
     fs.writeFileSync(
-      "public/data/testimonials.json",
+      "./public/data/testimonials.json",
       JSON.stringify(testimonials, null, 2)
     );
     fs.writeFileSync(
-      "public/data/all-videos.json",
+      "./public/data/all-videos.json",
       JSON.stringify(allVideos, null, 2)
     );
 
     console.log("\n✅ Data saved successfully!");
     console.log("📁 Files created:");
-    console.log("   - public/data/sermons.json");
-    console.log("   - public/data/testimonials.json");
-    console.log("   - public/data/all-videos.json");
+    console.log("   - ./public/data/sermons.json");
+    console.log("   - ./public/data/testimonials.json");
+    console.log("   - ./public/data/all-videos.json");
   } catch (error) {
     console.error("❌ Error:", error);
     process.exit(1);

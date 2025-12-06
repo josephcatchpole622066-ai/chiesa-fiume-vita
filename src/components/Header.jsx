@@ -45,7 +45,8 @@ function Header({ scrolled }) {
 
           <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
             <li><Link to="/" onClick={() => { setMenuOpen(false); setTimeout(() => scrollToSection('home'), 100); }}>Home</Link></li>
-            <li><Link to="/" onClick={() => { setMenuOpen(false); setTimeout(() => scrollToSection('about'), 100); }}>Chi Siamo</Link></li>
+            <li><Link to="/chi-siamo" onClick={() => setMenuOpen(false)}>Chi Siamo</Link></li>
+            <li><Link to="/ministeri" onClick={() => setMenuOpen(false)}>Ministeri</Link></li>
             <li><Link to="/" onClick={() => { setMenuOpen(false); setTimeout(() => scrollToSection('gallery'), 100); }}>Galleria</Link></li>
             <li><Link to="/" onClick={() => { setMenuOpen(false); setTimeout(() => scrollToSection('events'), 100); }}>Eventi</Link></li>
             <li 
@@ -62,7 +63,7 @@ function Header({ scrolled }) {
                 <li><Link to="/articles" onClick={() => { setMenuOpen(false); setContenutiOpen(false); }}>📝 Articoli</Link></li>
               </ul>
             </li>
-            <li><Link to="/" onClick={() => { setMenuOpen(false); setTimeout(() => scrollToSection('contact'), 100); }}>Contatti</Link></li>
+            <li><Link to="/contatti" onClick={() => setMenuOpen(false)}>Contatti</Link></li>
             {isAuthenticated ? (
               <>
                 <li>

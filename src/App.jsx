@@ -8,6 +8,7 @@ import Gallery from "./components/Gallery";
 import Events from "./components/Events";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 import EventDetail from "./pages/events/EventDetail";
 import SermonsDynamic from "./pages/sermons/SermonsDynamic";
 import SermonDetailDynamic from "./pages/sermons/SermonDetailDynamic";
@@ -15,8 +16,14 @@ import TestimonialsDynamic from "./pages/testimonials/TestimonialsDynamic";
 import TestimonialDetailDynamic from "./pages/testimonials/TestimonialDetailDynamic";
 import ArticlesPage from "./pages/articles/ArticlesPage";
 import ArticleDetail from "./pages/articles/ArticleDetail";
+import MinistriesPage from "./pages/ministries/MinistriesPage";
+import MinistryDetail from "./pages/ministries/MinistryDetail";
+import ContactPage from "./pages/contact/ContactPage";
+import ChiSiamo from "./pages/chi-siamo/ChiSiamo";
+import InCosaCrediamo from "./pages/chi-siamo/InCosaCrediamo";
 import LoginPage from "./pages/admin/LoginPage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import ArticlesAdmin from "./pages/admin/ArticlesAdmin";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -47,6 +54,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <ScrollToTop />
         <div className="App">
           <Header scrolled={scrolled} />
           <Routes>
@@ -58,12 +66,25 @@ function App() {
             <Route path="/testimonials/:testimonialId" element={<TestimonialDetailDynamic />} />
             <Route path="/articles" element={<ArticlesPage />} />
             <Route path="/articles/:articleId" element={<ArticleDetail />} />
+            <Route path="/ministeri" element={<MinistriesPage />} />
+            <Route path="/ministeri/:ministryId" element={<MinistryDetail />} />
+            <Route path="/contatti" element={<ContactPage />} />
+            <Route path="/chi-siamo" element={<ChiSiamo />} />
+            <Route path="/in-cosa-crediamo" element={<InCosaCrediamo />} />
             <Route path="/login" element={<LoginPage />} />
             <Route
               path="/admin/dashboard"
               element={
                 <PrivateRoute>
                   <AdminDashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/articles"
+              element={
+                <PrivateRoute>
+                  <ArticlesAdmin />
                 </PrivateRoute>
               }
             />

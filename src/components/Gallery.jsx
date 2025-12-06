@@ -6,44 +6,44 @@ function Gallery() {
 
   const images = [
     {
-      url: "https://images.unsplash.com/photo-1508355991726-dc73fcecb7e7?q=80&w=800",
-      title: "Celebrazione Domenicale",
-      category: "Liturgia",
+      url: "/images/gallery/PXL_20250928_095128681.jpg",
+      title: "Culto Domenicale",
+      category: "Culto",
     },
     {
-      url: "https://images.unsplash.com/photo-1519491050282-cf00c82424b4?q=80&w=800",
-      title: "Gruppo Giovanile",
+      url: "/images/gallery/PXL_20250927_175842812.jpg",
+      title: "Comunione Fraterna",
       category: "Comunità",
     },
     {
-      url: "https://images.unsplash.com/photo-1609234656388-0ff363383899?q=80&w=800",
-      title: "Coro Parrocchiale",
-      category: "Musica",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=800",
-      title: "Momenti di Preghiera",
-      category: "Liturgia",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=800",
-      title: "Incontri Biblici",
-      category: "Formazione",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800",
-      title: "Eventi Speciali",
+      url: "/images/gallery/PXL_20251109_112648076.PORTRAIT.jpg",
+      title: "Momento di Condivisione",
       category: "Comunità",
     },
     {
-      url: "https://images.unsplash.com/photo-1507692049790-de58290a4334?q=80&w=800",
-      title: "Vista di Pozzuoli",
-      category: "Territorio",
+      url: "/images/gallery/PXL_20250701_181216695.jpg",
+      title: "Estate in Chiesa",
+      category: "Eventi",
     },
     {
-      url: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
-      title: "Architettura Sacra",
-      category: "Chiesa",
+      url: "/images/gallery/PXL_20250928_090029265.jpg",
+      title: "Preghiera Insieme",
+      category: "Culto",
+    },
+    {
+      url: "/images/gallery/PXL_20251102_110438935.jpg",
+      title: "Comunità in Festa",
+      category: "Comunità",
+    },
+    {
+      url: "/images/gallery/PXL_20250831_102745048.jpg",
+      title: "Celebrazione Speciale",
+      category: "Eventi",
+    },
+    {
+      url: "/images/gallery/PXL_20251130_090248221.jpg",
+      title: "Lode e Adorazione",
+      category: "Culto",
     },
   ];
 
