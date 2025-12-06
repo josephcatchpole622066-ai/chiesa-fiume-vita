@@ -44,7 +44,6 @@ function Header({ scrolled }) {
           </button>
 
           <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
-            <li><Link to="/" onClick={() => { setMenuOpen(false); setTimeout(() => scrollToSection('home'), 100); }}>Home</Link></li>
             <li><Link to="/chi-siamo" onClick={() => setMenuOpen(false)}>Chi Siamo</Link></li>
             <li><Link to="/ministeri" onClick={() => setMenuOpen(false)}>Ministeri</Link></li>
             <li><Link to="/" onClick={() => { setMenuOpen(false); setTimeout(() => scrollToSection('gallery'), 100); }}>Galleria</Link></li>
@@ -64,26 +63,6 @@ function Header({ scrolled }) {
               </ul>
             </li>
             <li><Link to="/contatti" onClick={() => setMenuOpen(false)}>Contatti</Link></li>
-            {isAuthenticated ? (
-              <>
-                <li>
-                  <Link to="/admin/dashboard" onClick={() => setMenuOpen(false)}>
-                    👤 Admin
-                  </Link>
-                </li>
-                <li>
-                  <button onClick={handleLogout} className="logout-link">
-                    🚪 Esci
-                  </button>
-                </li>
-              </>
-            ) : (
-              <li>
-                <Link to="/login" onClick={() => setMenuOpen(false)} className="login-link">
-                  🔐 Login
-                </Link>
-              </li>
-            )}
           </ul>
         </nav>
       </div>

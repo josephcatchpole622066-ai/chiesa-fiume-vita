@@ -33,11 +33,11 @@ function AdminDashboard() {
             <p>Prossimamente disponibile</p>
           </div>
 
-          <div className="admin-card disabled">
+          <Link to="/admin/events" className="admin-card">
             <div className="card-icon">📅</div>
             <h3>Gestisci Eventi</h3>
-            <p>Prossimamente disponibile</p>
-          </div>
+            <p>Crea e modifica eventi della chiesa</p>
+          </Link>
         </div>
 
         <div className="admin-actions">

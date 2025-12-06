@@ -88,6 +88,34 @@
   font-size: 0.95rem;
 }
 
+.admin-links {
+  margin-top: 15px;
+  font-size: 0.75rem;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.admin-links:hover {
+  opacity: 0.8;
+}
+
+.admin-links a,
+.admin-links .logout-btn {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.admin-links a:hover,
+.admin-links .logout-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
 @media (max-width: 968px) {
   .footer-content {
     grid-template-columns: repeat(2, 1fr);

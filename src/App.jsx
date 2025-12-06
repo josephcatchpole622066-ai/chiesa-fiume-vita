@@ -4,6 +4,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import LatestSermon from "./components/LatestSermon";
 import Gallery from "./components/Gallery";
 import Events from "./components/Events";
 import Contact from "./components/Contact";
@@ -24,6 +25,7 @@ import InCosaCrediamo from "./pages/chi-siamo/InCosaCrediamo";
 import LoginPage from "./pages/admin/LoginPage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ArticlesAdmin from "./pages/admin/ArticlesAdmin";
+import EventsAdmin from "./pages/admin/EventsAdmin";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -32,6 +34,7 @@ function HomePage() {
     <>
       <Hero />
       <About />
+      <LatestSermon />
       <Gallery />
       <Events />
       <Contact />
@@ -85,6 +88,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <ArticlesAdmin />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/events"
+              element={
+                <PrivateRoute>
+                  <EventsAdmin />
                 </PrivateRoute>
               }
             />

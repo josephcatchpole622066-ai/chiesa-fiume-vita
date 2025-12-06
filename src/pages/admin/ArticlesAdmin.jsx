@@ -23,6 +23,7 @@ export default function ArticlesAdmin() {
   const [success, setSuccess] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [newCategory, setNewCategory] = useState({ value: '', label: '' });
+  const [showCustomCategory, setShowCustomCategory] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -35,7 +36,15 @@ export default function ArticlesAdmin() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    
+    if (name === 'category' && value === 'custom') {
+      setShowCustomCategory(true);
+    } else {
+      if (name === 'category') {
+        setShowCustomCategory(false);
+      }
+      setForm({ ...form, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -43,13 +52,25 @@ export default function ArticlesAdmin() {
     setError('');
     setSuccess('');
 
-    if (!form.title || !form.content || !form.category) {
+    // Se categoria custom, crea la categoria prima
+    let categoryValue = form.category;
+    if (showCustomCategory && newCategory.value && newCategory.label) {
+      const updatedCategories = [...categories, newCategory];
+      saveCategories(updatedCategories);
+      setCategories(updatedCategories);
+      categoryValue = newCategory.value;
+      setNewCategory({ value: '', label: '' });
+      setShowCustomCategory(false);
+    }
+
+    if (!form.title || !form.content || (!categoryValue && !showCustomCategory)) {
       setError('Titolo, contenuto e categoria sono obbligatori.');
       return;
     }
 
     const articleData = {
       ...form,
+      category: categoryValue,
       id: editingId || `article-${Date.now()}`,
       excerpt: form.excerpt || form.content.slice(0, 150) + '...',
       readTime: form.readTime || `${Math.ceil(form.content.split(' ').length / 200)} min`
@@ -90,6 +111,8 @@ export default function ArticlesAdmin() {
   const resetForm = () => {
     setForm(initialForm);
     setEditingId(null);
+    setShowCustomCategory(false);
+    setNewCategory({ value: '', label: '' });
   };
 
   const handleAddCategory = (e) => {
@@ -176,7 +199,7 @@ export default function ArticlesAdmin() {
                 <label>Categoria *</label>
                 <select
                   name="category"
-                  value={form.category}
+                  value={showCustomCategory ? 'custom' : form.category}
                   onChange={handleChange}
                   required
                 >
@@ -186,7 +209,26 @@ export default function ArticlesAdmin() {
                       {cat.label}
                     </option>
                   ))}
+                  <option value="custom">➕ Nuova Categoria...</option>
                 </select>
+                {showCustomCategory && (
+                  <div style={{ marginTop: '10px', display: 'flex', gap: '10px', flexDirection: 'column' }}>
+                    <input
+                      type="text"
+                      value={newCategory.value}
+                      onChange={(e) => setNewCategory({ ...newCategory, value: e.target.value })}
+                      placeholder="Valore (es: testimonianze)"
+                      required
+                    />
+                    <input
+                      type="text"
+                      value={newCategory.label}
+                      onChange={(e) => setNewCategory({ ...newCategory, label: e.target.value })}
+                      placeholder="Etichetta (es: Testimonianze)"
+                      required
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="form-group">

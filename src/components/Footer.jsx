@@ -1,8 +1,17 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import "./Footer.css";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <footer className="footer">
@@ -85,6 +94,17 @@ function Footer() {
             &copy; {currentYear} Chiesa Pozzuoli. Tutti i diritti riservati.
           </p>
           <p>Realizzato con ❤️ per la nostra comunità</p>
+          <div className="admin-links">
+            {isAuthenticated ? (
+              <>
+                <Link to="/admin/dashboard">Admin</Link>
+                <span> · </span>
+                <button onClick={handleLogout} className="logout-btn">Esci</button>
+              </>
+            ) : (
+              <Link to="/login">Login</Link>
+            )}
+          </div>
         </div>
       </div>
     </footer>
