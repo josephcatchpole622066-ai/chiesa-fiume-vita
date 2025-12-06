@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-import { getCachedVideos, fetchYouTubeVideos, filterSermons, excludeSongs } from '../../utils/youtubeAPI';
 import jsPDF from 'jspdf';
 import './SermonDetail.css';
 
@@ -318,14 +317,12 @@ function SermonDetailDynamic() {
     try {
       setLoading(true);
 
-      // Usa cache globale o carica da YouTube
-      let videos = getCachedVideos();
-      if (!videos) {
-        console.log('Cache non disponibile, carico da API');
-        videos = await fetchYouTubeVideos('UCGdxHNQjIRAQJ66S5bCRJlg');
-      } else {
-        console.log('Uso cache globale per dettaglio video');
+      // Carica i dati dal file JSON statico
+      const response = await fetch('/data/sermons.json');
+      if (!response.ok) {
+        throw new Error('Failed to load sermons data');
       }
+      const videos = await response.json();
       
       const youtubeVideo = videos.find(v => v.id === sermonId);
       
@@ -367,20 +364,8 @@ function SermonDetailDynamic() {
           }
         });
         
-        // Applica gli stessi filtri usati nella pagina principale
-        const filtered = filterSermons(videos);
-        const finalVideos = excludeSongs(filtered);
-        
-        // Escludi video dalla playlist "Culto di Adorazione Live"
-        const excludedPlaylists = ['culto di adorazione live'];
-        const withoutAdorationLive = finalVideos.filter(video => {
-          if (!video.playlist) return true;
-          const playlistLower = video.playlist.toLowerCase();
-          return !excludedPlaylists.some(excluded => playlistLower.includes(excluded));
-        });
-        
-        // Prendi altri video YouTube filtrati per la sezione "Altre Predicazioni"
-        const otherVideos = withoutAdorationLive
+        // Carica altre predicazioni dal JSON (già filtrate)
+        const otherVideos = videos
           .filter(v => v.id !== sermonId)
           .slice(0, 3)
           .map(v => ({

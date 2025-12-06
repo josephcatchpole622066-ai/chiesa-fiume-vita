@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getCachedVideos, fetchYouTubeVideos, filterTestimonials, excludeSongs } from '../../utils/youtubeAPI';
 import '../sermons/SermonDetail.css';
 import './TestimonialDetail.css';
 
@@ -32,14 +31,12 @@ function TestimonialDetailDynamic() {
     try {
       setLoading(true);
 
-      // Usa cache globale o carica da YouTube
-      let videos = getCachedVideos();
-      if (!videos) {
-        console.log('Cache non disponibile, carico da API');
-        videos = await fetchYouTubeVideos('UCGdxHNQjIRAQJ66S5bCRJlg');
-      } else {
-        console.log('Uso cache globale per dettaglio testimonianza');
+      // Carica i dati dal file JSON statico
+      const response = await fetch('/data/all-videos.json');
+      if (!response.ok) {
+        throw new Error('Failed to load videos data');
       }
+      const videos = await response.json();
       
       const youtubeVideo = videos.find(v => v.id === testimonialId);
       
@@ -77,19 +74,22 @@ function TestimonialDetailDynamic() {
           thumbnail: youtubeVideo.thumbnail
         });
         
-        // Carica altre testimonianze per la sezione "Altre Testimonianze"
-        const filtered = excludeSongs(filterTestimonials(videos));
-        const otherTestimonials = filtered
-          .filter(v => v.id !== testimonialId)
-          .slice(0, 3)
-          .map(v => ({
-            id: v.id,
-            title: v.title,
-            date: v.publishedAt,
-            thumbnail: v.thumbnail,
-            views: v.views || 0
-          }));
-        setAllTestimonials(otherTestimonials);
+        // Carica altre testimonianze dal JSON
+        const testimonialsResponse = await fetch('/data/testimonials.json');
+        if (testimonialsResponse.ok) {
+          const allTestimonialsData = await testimonialsResponse.json();
+          const otherTestimonials = allTestimonialsData
+            .filter(v => v.id !== testimonialId)
+            .slice(0, 3)
+            .map(v => ({
+              id: v.id,
+              title: v.title,
+              date: v.publishedAt,
+              thumbnail: v.thumbnail,
+              views: v.views || 0
+            }));
+          setAllTestimonials(otherTestimonials);
+        }
       }
     } catch (err) {
       console.error(err);

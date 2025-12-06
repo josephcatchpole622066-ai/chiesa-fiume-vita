@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchYouTubeVideos, filterSermons, excludeSongs, getCachedVideos } from '../../utils/youtubeAPI';
 import './SermonsPage.css';
 
 function SermonsDynamic() {
@@ -22,45 +21,27 @@ function SermonsDynamic() {
       setLoading(true);
       setError(null);
 
-      let videos;
-      
-      // Usa cache globale se disponibile e valida
-      const cached = getCachedVideos();
-      if (cached) {
-        console.log('Uso video dalla cache globale');
-        videos = cached;
-      } else {
-        console.log('Carico video da YouTube API');
-        videos = await fetchYouTubeVideos('UCGdxHNQjIRAQJ66S5bCRJlg');
+      // Carica i video dal file JSON statico
+      const response = await fetch('/data/sermons.json');
+      if (!response.ok) {
+        throw new Error('Failed to load sermons data');
       }
+      const videos = await response.json();
+      const videos = await response.json();
       
-      const filtered = filterSermons(videos);
-      const finalVideos = excludeSongs(filtered);
-      
-      // Escludi video dalla playlist "Culto di Adorazione Live" (case insensitive)
-      const excludedPlaylists = ['culto di adorazione live'];
-      const withoutAdorationLive = finalVideos.filter(video => {
-        if (!video.playlist) return true;
-        const playlistLower = video.playlist.toLowerCase();
-        return !excludedPlaylists.some(excluded => playlistLower.includes(excluded));
-      });
-      
-      console.log(`Esclusi ${finalVideos.length - withoutAdorationLive.length} video dalla playlist adorazione live`);
-
       // Ordina per data (più recenti prima)
-      const allSermons = withoutAdorationLive.sort((a, b) => 
+      const allSermons = videos.sort((a, b) => 
         new Date(b.publishedAt) - new Date(a.publishedAt)
       );
 
       setSermons(allSermons);
       
-      // Estrai playlist uniche dai video YouTube (esclusa adorazione live)
+      // Estrai playlist uniche dai video (se disponibili)
       const playlists = [...new Set(allSermons.map(s => s.playlist).filter(Boolean))];
       setDynamicPlaylists(playlists);
     } catch (err) {
       console.error('Errore nel caricamento:', err);
       setError('Errore nel caricamento delle predicazioni');
-      // In caso di errore, array vuoto (dati statici disponibili per test se necessario)
       setSermons([]);
     } finally {
       setLoading(false);

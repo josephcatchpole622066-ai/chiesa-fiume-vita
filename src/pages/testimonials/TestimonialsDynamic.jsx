@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchYouTubeVideos, filterTestimonials, excludeSongs } from '../../utils/youtubeAPI';
 import './TestimonialsPage.css';
 
 function TestimonialsDynamic() {
@@ -18,13 +17,14 @@ function TestimonialsDynamic() {
       setLoading(true);
       setError(null);
       
-      // Carica i video dal canale
-      const videos = await fetchYouTubeVideos('UCGdxHNQjIRAQJ66S5bCRJlg');
+      // Carica le testimonianze dal file JSON statico
+      const response = await fetch('/data/testimonials.json');
+      if (!response.ok) {
+        throw new Error('Failed to load testimonials data');
+      }
+      const videos = await response.json();
       
-      // Filtra solo testimonianze ed escludi canti
-      const filtered = excludeSongs(filterTestimonials(videos));
-      
-      setAllVideos(filtered);
+      setAllVideos(videos);
     } catch (err) {
       setError('Errore nel caricamento delle testimonianze. Riprova più tardi.');
       console.error(err);
