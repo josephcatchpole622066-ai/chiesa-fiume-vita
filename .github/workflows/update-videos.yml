@@ -38,6 +38,9 @@ jobs:
           VITE_YOUTUBE_API_KEY: ${{ secrets.VITE_YOUTUBE_API_KEY }}
         run: node scripts/fetch-videos.js
 
+      - name: Download images from Google Drive
+        run: node scripts/download-drive-images.js
+
       - name: Check if there are changes
         id: check_changes
         run: |

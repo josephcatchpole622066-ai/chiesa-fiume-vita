@@ -24,7 +24,7 @@ const MinistryDetail = () => {
         'Eventi speciali per giovani'
       ],
       requirements: 'Aperto a tutti, nessuna esperienza richiesta',
-      image: '/images/gallery/PXL_20250831_102745048.jpg'
+      image: '/images/Calcetto/PXL_20250701_181216695.jpg'
     },
     'donne': {
       name: 'Ministero Donne',
@@ -44,7 +44,7 @@ const MinistryDetail = () => {
         'Supporto reciproco'
       ],
       requirements: 'Aperto a tutte le donne',
-      image: '/images/gallery/PXL_20250914_100048260.PORTRAIT.jpg'
+      image: '/images/Donne/WhatsApp-Image-2025-08-20-at-19.13.51.jpeg'
     },
     'giovanissimi': {
       name: 'Giovanissimi',
@@ -65,7 +65,7 @@ const MinistryDetail = () => {
         'Musica e worship'
       ],
       requirements: 'Ragazzi delle medie e superiori',
-      image: '/images/gallery/PXL_20250927_175842812.jpg'
+      image: '/images/Giovanissimi/WhatsApp-Image-2025-09-27-at-09.07.37-e1758956932198.jpeg'
     },
     'giovani-famiglie': {
       name: 'Giovani Famiglie',
@@ -86,7 +86,7 @@ const MinistryDetail = () => {
         'Eventi ricreativi'
       ],
       requirements: 'Coppie con figli',
-      image: '/images/gallery/PXL_20250928_095128681.jpg'
+      image: '/images/Giovani famiglie/WhatsApp-Image-2025-09-27-at-09.22.43-scaled-e1761038047390.jpeg'
     },
     'chiesa-in-casa': {
       name: 'Chiesa in Casa',
@@ -107,7 +107,7 @@ const MinistryDetail = () => {
         'Evangelizzazione di quartiere'
       ],
       requirements: 'Aperto a tutti',
-      image: '/images/gallery/PXL_20250928_090029265.jpg',
+      image: '/images/Chiesa in casa/WhatsApp-Image-2025-08-20-at-17.15.00-e1757767527844.jpeg',
       locations: [
         {
           name: 'Pozzuoli',
@@ -154,7 +154,7 @@ const MinistryDetail = () => {
         'Seminari su paternità e leadership'
       ],
       requirements: 'Aperto a tutti gli uomini',
-      image: '/images/gallery/PXL_20250928_084839734.jpg'
+      image: '/images/Uomini/WhatsApp-Image-2025-08-20-at-19.13.32-e1758956127147.jpeg'
     },
     'scuola-domenicale': {
       name: 'Scuola Domenicale',
@@ -175,7 +175,7 @@ const MinistryDetail = () => {
         'Eventi speciali (Natale, Pasqua)'
       ],
       requirements: 'Bambini 3-12 anni',
-      image: '/images/gallery/PXL_20250404_180951920.jpg'
+      image: '/images/Scuola domenicale/PXL_20250928_101847338-scaled.jpg'
     },
     'aiuto-bisognosi': {
       name: 'Aiuto ai Bisognosi',
@@ -196,7 +196,7 @@ const MinistryDetail = () => {
         'Progetti di integrazione'
       ],
       requirements: 'Cuore disponibile a servire',
-      image: '/images/gallery/PXL_20250928_090139141.jpg'
+      image: '/images/Aiuto bisognosi/Immagine7-1.png'
     },
     'inglese': {
       name: 'Corso di Inglese',
@@ -216,7 +216,7 @@ const MinistryDetail = () => {
         'Eventi culturali in inglese'
       ],
       requirements: 'Nessun livello richiesto, aperto a tutti',
-      image: '/images/gallery/PXL_20250405_195217346.jpg'
+      image: '/images/Inglese/tips-to-learn-English-blog.webp'
     }
   };
 

@@ -14,7 +14,7 @@ const MinistriesPage = () => {
       description: 'Momenti di comunione attraverso lo sport del calcio',
       icon: '⚽',
       color: '#27ae60',
-      image: '/images/gallery/PXL_20250831_102745048.jpg'
+      image: '/images/Calcetto/PXL_20250701_181216695.jpg'
     },
     {
       id: 'donne',
@@ -23,7 +23,7 @@ const MinistriesPage = () => {
       description: 'Incontri di preghiera, studio biblico e sostegno tra sorelle',
       icon: '👭',
       color: '#e91e63',
-      image: '/images/gallery/PXL_20250914_100048260.PORTRAIT.jpg'
+      image: '/images/Donne/WhatsApp-Image-2025-08-20-at-19.13.51.jpeg'
     },
     {
       id: 'giovanissimi',
@@ -32,7 +32,7 @@ const MinistriesPage = () => {
       description: 'Per ragazzi delle medie e superiori',
       icon: '🎒',
       color: '#9c27b0',
-      image: '/images/gallery/PXL_20250927_175842812.jpg'
+      image: '/images/Giovanissimi/WhatsApp-Image-2025-09-27-at-09.07.37-e1758956932198.jpeg'
     },
     {
       id: 'giovani-famiglie',
@@ -41,7 +41,7 @@ const MinistriesPage = () => {
       description: 'Supporto e comunione per le giovani coppie con figli',
       icon: '👨‍👩‍👧‍👦',
       color: '#ff9800',
-      image: '/images/gallery/PXL_20250928_095128681.jpg'
+      image: '/images/Giovani famiglie/WhatsApp-Image-2025-09-27-at-09.22.43-scaled-e1761038047390.jpeg'
     },
     {
       id: 'chiesa-in-casa',
@@ -50,7 +50,7 @@ const MinistriesPage = () => {
       description: 'Incontri settimanali in diverse zone: Pozzuoli, Quarto, Monteruscello, Arcofelice',
       icon: '🏠',
       color: '#2196f3',
-      image: '/images/gallery/PXL_20250928_090029265.jpg'
+      image: '/images/Chiesa in casa/WhatsApp-Image-2025-08-20-at-17.15.00-e1757767527844.jpeg'
     },
     {
       id: 'uomini',
@@ -59,7 +59,7 @@ const MinistriesPage = () => {
       description: 'Crescita spirituale e sostegno tra fratelli',
       icon: '👨‍👨‍👦',
       color: '#3f51b5',
-      image: '/images/gallery/PXL_20250928_084839734.jpg'
+      image: '/images/Uomini/WhatsApp-Image-2025-08-20-at-19.13.32-e1758956127147.jpeg'
     },
     {
       id: 'scuola-domenicale',
@@ -68,7 +68,7 @@ const MinistriesPage = () => {
       description: 'Insegnamento biblico per i più piccoli',
       icon: '📖',
       color: '#ffc107',
-      image: '/images/gallery/PXL_20250404_180951920.jpg'
+      image: '/images/Scuola domenicale/PXL_20250928_101847338-scaled.jpg'
     },
     {
       id: 'aiuto-bisognosi',
@@ -77,7 +77,7 @@ const MinistriesPage = () => {
       description: 'Sostegno concreto a chi è nel bisogno',
       icon: '🤝',
       color: '#f44336',
-      image: '/images/gallery/PXL_20250928_090139141.jpg'
+      image: '/images/Aiuto bisognosi/Immagine7-1.png'
     },
     {
       id: 'inglese',
@@ -86,7 +86,7 @@ const MinistriesPage = () => {
       description: 'Lezioni di inglese per la comunità',
       icon: '🇬🇧',
       color: '#00bcd4',
-      image: '/images/gallery/PXL_20250405_195217346.jpg'
+      image: '/images/Inglese/tips-to-learn-English-blog.webp'
     }
   ];
 
