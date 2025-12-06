@@ -27,7 +27,6 @@ function SermonsDynamic() {
         throw new Error('Failed to load sermons data');
       }
       const videos = await response.json();
-      const videos = await response.json();
       
       // Ordina per data (più recenti prima)
       const allSermons = videos.sort((a, b) => 
