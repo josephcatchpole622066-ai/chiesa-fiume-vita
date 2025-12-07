@@ -1,0 +1,359 @@
+.nuova-sede-page {
+  padding-top: 70px;
+}
+
+/* Hero */
+.nuova-sede-hero {
+  height: 500px;
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.nuova-sede-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2000');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+}
+
+.nuova-sede-hero .hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 20px;
+  text-align: center;
+  color: white;
+}
+
+.nuova-sede-hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.nuova-sede-hero p {
+  font-size: 1.5rem;
+  opacity: 0.95;
+}
+
+/* Project Intro */
+.project-intro {
+  padding: 80px 0;
+  background: white;
+}
+
+.intro-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.intro-content h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.intro-content .lead {
+  font-size: 1.3rem;
+  color: #555;
+  line-height: 1.8;
+}
+
+/* Project Details */
+.project-details {
+  padding: 80px 0;
+  background: #f8f9fa;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.detail-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.detail-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.detail-card h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.detail-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.detail-card ul li {
+  padding: 10px 0;
+  color: #555;
+  line-height: 1.6;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.detail-card ul li:last-child {
+  border-bottom: none;
+}
+
+.detail-card p {
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.btn-map-inline {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 25px;
+  background: linear-gradient(135deg, var(--primary-color), #4a5568);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-map-inline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Vision Section */
+.vision-section {
+  padding: 80px 0;
+  background: white;
+}
+
+.vision-section h2 {
+  font-size: 2.5rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.vision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.vision-card {
+  text-align: center;
+  padding: 30px;
+  border-radius: 12px;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.vision-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.vision-icon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+
+.vision-card h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.vision-card p {
+  color: #666;
+  line-height: 1.7;
+}
+
+/* Support Section */
+.support-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.support-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.support-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.support-content > p {
+  font-size: 1.2rem;
+  margin-bottom: 50px;
+  opacity: 0.95;
+}
+
+.support-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.support-option {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.support-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.support-option h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.support-option p {
+  opacity: 0.9;
+}
+
+.support-cta {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 40px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.support-cta p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 15px 35px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: white;
+  color: #667eea;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-secondary:hover {
+  background: white;
+  color: #667eea;
+  transform: translateY(-2px);
+}
+
+/* Faith Section */
+.faith-section {
+  padding: 80px 0;
+  background: #2c3e50;
+  color: white;
+}
+
+.faith-quote {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.faith-quote blockquote {
+  font-size: 2rem;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.faith-quote cite {
+  display: block;
+  margin-top: 30px;
+  font-size: 1.2rem;
+  font-style: normal;
+  opacity: 0.8;
+}
+
+@media (max-width: 968px) {
+  .nuova-sede-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .details-grid,
+  .vision-grid,
+  .support-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+  
+  .faith-quote blockquote {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nuova-sede-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .intro-content h2,
+  .vision-section h2,
+  .support-content h2 {
+    font-size: 2rem;
+  }
+}

@@ -36,9 +36,9 @@ function Contact() {
               <div className="info-icon">📍</div>
               <h3>Indirizzo</h3>
               <p>
-                Via Roma, 123
+                Via Casalanno, 85
                 <br />
-                80078 Pozzuoli (NA)
+                80010 Cafone (NA)
                 <br />
                 Italia
               </p>
@@ -48,7 +48,7 @@ function Contact() {
               <div className="info-icon">📞</div>
               <h3>Telefono</h3>
               <p>
-                +39 081 123 4567
+                +39 327 457 2078
                 <br />
                 Lun-Ven: 9:00 - 18:00
                 <br />
@@ -159,14 +159,14 @@ function Contact() {
 
         <div className="map-container">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24106.98835394758!2d14.110682!3d40.827082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133b0f4a6c2e4f8f%3A0x9f0d84d8c1f9e9a5!2sPozzuoli%2C%20Metropolitan%20City%20of%20Naples%2C%20Italy!5e0!3m2!1sen!2sus!4v1234567890"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1!2d14.1434!3d40.8532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDUxJzExLjUiTiAxNMKwMDgnMzYuMiJF!5e0!3m2!1sen!2sit!4v1234567890&q=Via+Casalanno+85+Cafone+NA"
             width="100%"
             height="450"
             style={{ border: 0, borderRadius: "20px" }}
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Mappa Chiesa Pozzuoli"
+            title="Mappa Chiesa Fiume di Vita - Via Casalanno, 85 Cafone"
           ></iframe>
         </div>
       </div>

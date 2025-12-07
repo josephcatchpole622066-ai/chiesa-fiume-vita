@@ -57,11 +57,11 @@ const ContactPage = () => {
               <div className="info-icon-modern">📍</div>
               <div className="info-content-modern">
                 <h3>Dove Siamo</h3>
-                <p>Via Roma, 123</p>
-                <p>80078 Pozzuoli (NA)</p>
+                <p>Via Casalanno, 85</p>
+                <p>80010 Cafone (NA)</p>
                 <p>Italia</p>
                 <a 
-                  href="https://www.google.com/maps/search/Via+Roma+123+Pozzuoli" 
+                  href="https://www.google.com/maps/search/Via+Casalanno+85+Cafone+NA" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="map-link"
@@ -75,12 +75,8 @@ const ContactPage = () => {
               <div className="info-icon-modern">📞</div>
               <div className="info-content-modern">
                 <h3>Telefono</h3>
-                <p><a href="tel:+390811234567">+39 081 123 4567</a></p>
-                <div className="hours">
-                  <p><strong>Orari segreteria:</strong></p>
-                  <p>Lun-Ven: 9:00 - 13:00 / 15:00 - 18:00</p>
-                  <p>Sabato: 9:00 - 13:00</p>
-                </div>
+                <p><a href="tel:+393274572078">+39 327 457 2078</a></p>
+                <p><strong>Riferimento: Alec</strong></p>
               </div>
             </div>
 

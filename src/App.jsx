@@ -22,6 +22,8 @@ import MinistryDetail from "./pages/ministries/MinistryDetail";
 import ContactPage from "./pages/contact/ContactPage";
 import ChiSiamo from "./pages/chi-siamo/ChiSiamo";
 import InCosaCrediamo from "./pages/chi-siamo/InCosaCrediamo";
+import Unisciti from "./pages/unisciti/Unisciti";
+import NuovaSede from "./pages/nuova-sede/NuovaSede";
 import LoginPage from "./pages/admin/LoginPage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ArticlesAdmin from "./pages/admin/ArticlesAdmin";
@@ -74,6 +76,8 @@ function App() {
             <Route path="/contatti" element={<ContactPage />} />
             <Route path="/chi-siamo" element={<ChiSiamo />} />
             <Route path="/in-cosa-crediamo" element={<InCosaCrediamo />} />
+            <Route path="/unisciti" element={<Unisciti />} />
+            <Route path="/nuova-sede" element={<NuovaSede />} />
             <Route path="/login" element={<LoginPage />} />
             <Route
               path="/admin/dashboard"

@@ -81,9 +81,9 @@ function Footer() {
           <div className="footer-section">
             <h4>Contatti</h4>
             <ul>
-              <li>📍 Via Roma, 123</li>
-              <li>80078 Pozzuoli (NA)</li>
-              <li>📞 +39 081 123 4567</li>
+              <li>📍 Via Casalanno, 85</li>
+              <li>80010 Cafone (NA)</li>
+              <li>📞 +39 327 457 2078</li>
               <li>✉️ info@chiesapozzuoli.it</li>
             </ul>
           </div>

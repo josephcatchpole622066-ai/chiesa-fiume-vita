@@ -104,7 +104,7 @@ function EventDetail() {
             <p>Per ulteriori informazioni:</p>
             <div className="contact-links">
               <a href="tel:+390811234567" className="contact-link">
-                📞 +39 081 123 4567
+                📞 +39 327 457 2078 (Alec)
               </a>
               <a href="mailto:info@chiesapozzuoli.it" className="contact-link">
                 ✉️ info@chiesapozzuoli.it

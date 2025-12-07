@@ -1,25 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Hero.css";
 
 function Hero() {
   return (
     <section id="home" className="hero">
       <div className="hero-content">
-        <h1 className="hero-title fade-in-up">Benvenuti nella nostra Chiesa</h1>
+        <p className="hero-subtitle-small fade-in-up">CHIESA FIUME DI VITA</p>
+        <h1 className="hero-title fade-in-up">Amare Dio e servire Cristo a Pozzuoli</h1>
         <p className="hero-subtitle fade-in-up">
-          Una comunità di fede, speranza e amore a Pozzuoli
+          Vieni a trovarci alle 10:15
         </p>
         <div className="hero-buttons fade-in-up">
-          <button
-            className="btn btn-secondary"
-            onClick={() =>
-              document
-                .getElementById("contact")
-                .scrollIntoView({ behavior: "smooth" })
-            }
-          >
+          <Link to="/unisciti" className="btn btn-hero">
             Unisciti a Noi
-          </button>
+          </Link>
         </div>
       </div>
       <div className="scroll-indicator">
