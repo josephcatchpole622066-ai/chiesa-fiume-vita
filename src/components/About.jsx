@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./About.css";
 
 function About() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="about" className="about">
+    <section id="about" className="about" ref={sectionRef}>
       <div className="container">
         <h2 className="section-title">Chi Siamo</h2>
         <p className="section-subtitle">
@@ -28,26 +54,30 @@ function About() {
             </p>
 
             <div className="features">
-              <div className="feature">
+              <div className={`feature ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.1s' }}>
                 <div className="feature-icon">🙏</div>
+                <div className="feature-line"></div>
                 <h4>Preghiera</h4>
                 <p>Momenti di preghiera comunitaria e personale</p>
               </div>
 
-              <div className="feature">
+              <div className={`feature ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.3s' }}>
                 <div className="feature-icon">❤️</div>
+                <div className="feature-line"></div>
                 <h4>Comunità</h4>
                 <p>Una famiglia accogliente e calorosa</p>
               </div>
 
-              <div className="feature">
+              <div className={`feature ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.5s' }}>
                 <div className="feature-icon">📖</div>
+                <div className="feature-line"></div>
                 <h4>Studio</h4>
                 <p>Approfondimento della Parola di Dio</p>
               </div>
 
-              <div className="feature">
+              <div className={`feature ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.7s' }}>
                 <div className="feature-icon">🤝</div>
+                <div className="feature-line"></div>
                 <h4>Servizio</h4>
                 <p>Aiuto concreto a chi è nel bisogno</p>
               </div>
@@ -56,19 +86,19 @@ function About() {
         </div>
 
         <div className="stats">
-          <div className="stat">
+          <div className={`stat ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.2s' }}>
             <h3>50+</h3>
             <p>Anni di Storia</p>
           </div>
-          <div className="stat">
+          <div className={`stat ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.4s' }}>
             <h3>500+</h3>
             <p>Membri Attivi</p>
           </div>
-          <div className="stat">
+          <div className={`stat ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.6s' }}>
             <h3>20+</h3>
             <p>Attività Settimanali</p>
           </div>
-          <div className="stat">
+          <div className={`stat ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.8s' }}>
             <h3>100%</h3>
             <p>Amore e Dedizione</p>
           </div>

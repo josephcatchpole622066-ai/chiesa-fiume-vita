@@ -315,8 +315,24 @@ async function getVideoPlaylists(channelId) {
         if (data.items) {
           data.items.forEach((item) => {
             const videoId = item.contentDetails.videoId;
-            // Salva solo la prima playlist in cui appare il video
-            if (!videoPlaylistMap.has(videoId)) {
+            const playlistTitle = playlist.snippet.title.toLowerCase();
+
+            // Definisci priorità: playlist specifiche hanno priorità su quelle generiche
+            const isGenericPlaylist =
+              playlistTitle.includes("uploads") ||
+              playlistTitle.includes("tutti") ||
+              playlistTitle.includes("all");
+
+            const existingPlaylist = videoPlaylistMap.get(videoId);
+
+            // Salva la playlist se:
+            // 1. Il video non ha ancora una playlist associata, OPPURE
+            // 2. La playlist esistente è generica e questa è specifica
+            if (
+              !existingPlaylist ||
+              (existingPlaylist.title.toLowerCase().includes("uploads") &&
+                !isGenericPlaylist)
+            ) {
               videoPlaylistMap.set(videoId, {
                 id: playlist.id,
                 title: playlist.snippet.title,
