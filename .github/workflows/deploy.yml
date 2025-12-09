@@ -47,6 +47,8 @@ jobs:
         run: node scripts/download-drive-images.js || true
 
       - name: Build
+        env:
+          NODE_ENV: production
         run: npm run build
 
       - name: Copy images to dist
