@@ -1,5 +1,237 @@
-.events {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+/* --- Modern Events Section (Design Allegato) --- */
+.events-figa {
+  background: #f7f9fc;
+  padding: 60px 0 40px 0;
+}
+.events-figa-grid {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.event-figa-main-card {
+  background: none;
+  border-radius: 28px;
+  overflow: hidden;
+  max-width: 520px;
+  flex: 1 1 520px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: none;
+}
+.event-figa-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+}
+.event-figa-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.82);
+}
+.event-figa-date-badge {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 16px;
+  padding: 16px 22px;
+  text-align: center;
+  font-family: inherit;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  font-weight: 700;
+  z-index: 2;
+}
+.event-figa-date-day {
+  font-size: 1.7rem;
+  font-weight: 700;
+  display: block;
+}
+.event-figa-date-month {
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: block;
+  text-transform: uppercase;
+}
+.event-figa-main-overlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 32px 28px 24px 28px;
+  background: linear-gradient(0deg, rgba(44,62,80,0.95) 70%, rgba(44,62,80,0.0) 100%);
+  color: #fff;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.event-figa-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #fff;
+}
+.event-figa-details {
+  display: flex;
+  gap: 18px;
+  font-size: 0.98rem;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.event-figa-detail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.event-icon-svg {
+  width: 1.1em;
+  height: 1.1em;
+  stroke: #fff;
+}
+.event-figa-description {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.event-figa-btns {
+  display: flex;
+  gap: 12px;
+}
+.event-figa-btn {
+  padding: 10px 22px;
+  border-radius: 24px;
+  border: 2px solid #fff;
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  text-decoration: none;
+}
+.event-figa-btn-primary {
+  background: var(--accent-color);
+  color: #fff;
+  border: 2px solid var(--accent-color);
+}
+.event-figa-btn:hover {
+  background: var(--accent-color);
+  color: #fff;
+  border: 2px solid var(--accent-color);
+}
+.event-figa-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 370px;
+  flex: 1 1 370px;
+}
+.event-figa-list-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  padding: 28px 34px;
+  gap: 18px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.event-figa-list-card:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+.event-figa-list-card.selected {
+  border: 2px solid var(--accent-color);
+}
+.event-figa-list-date-badge {
+  min-width: 80px;
+  text-align: center;
+  border-radius: 14px;
+  background: #f7f9fc;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.2rem;
+  border: 2px solid var(--primary-color);
+  padding: 14px 0;
+  margin-left: 18px;
+}
+.event-figa-list-date-badge.selected {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+.event-figa-list-date-day {
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: block;
+}
+.event-figa-list-date-month {
+  font-size: 1rem;
+  font-weight: 500;
+  display: block;
+  text-transform: uppercase;
+}
+.event-figa-list-content {
+  flex: 1;
+}
+.event-figa-list-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--primary-color);
+}
+.event-figa-list-details {
+  display: flex;
+  gap: 14px;
+  font-size: 0.97rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+.event-figa-list-detail {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.event-icon-svg-small {
+  width: 1em;
+  height: 1em;
+  stroke: #555;
+}
+.event-figa-list-description {
+  font-size: 0.98rem;
+  color: #444;
+  line-height: 1.5;
+}
+.event-figa-discover-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+.event-figa-discover-btn {
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 24px;
+  padding: 16px 44px;
+  font-size: 1.12rem;
+  font-weight: 700;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+.event-figa-discover-btn:hover {
+  background: #e67e22;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 
 .events-grid {
