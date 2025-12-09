@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - master
+  schedule:
+    - cron: "0 0 * * 2"  # Ogni martedì a mezzanotte
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -29,6 +31,26 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Fetch YouTube videos data
+        env:
+          VITE_YOUTUBE_API_KEY: ${{ secrets.VITE_YOUTUBE_API_KEY }}
+        run: node scripts/fetch-videos.js
+
+      - name: Download images from Google Drive
+        env:
+          GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+        run: node scripts/download-drive-images.js
+
+      - name: Commit updated data
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add public/data/*.json public/images/**/* || true
+          git diff --staged --quiet || git commit -m "🤖 Auto-update: data and images [$(date +'%Y-%m-%d %H:%M:%S')]"
+          git push origin master || true
 
       - name: Build
         run: npm run build
