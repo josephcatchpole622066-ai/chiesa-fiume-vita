@@ -49,6 +49,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Copy images to dist
+        run: |
+          mkdir -p dist/images
+          cp -r public/images/* dist/images/ || true
+          echo "Images copied to dist/images"
+          ls -la dist/images/
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
