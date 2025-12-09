@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import getImagePath from '../../utils/imagePaths';
 import './ChiSiamo.css';
 
 const ChiSiamo = () => {
@@ -69,7 +70,7 @@ const ChiSiamo = () => {
             </div>
 
             <div className="storia-image">
-              <img src="/images/gallery/PXL_20250928_095128681.jpg" alt="La nostra comunità" />
+              <img src={getImagePath('images/gallery/PXL_20250928_095128681.jpg')} alt="La nostra comunità" />
             </div>
           </div>
         </div>

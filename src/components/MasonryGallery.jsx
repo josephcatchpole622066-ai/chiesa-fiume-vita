@@ -3,17 +3,19 @@ import Masonry from "react-masonry-css";
 import Carousel, { Modal, ModalGateway } from "react-images";
 import "./Gallery.css";
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 const allImages = [
-  { src: "/images/Generale/PXL_20250405_195217346.jpg" },
-  { src: "/images/Generale/PXL_20250412_164521498.jpg" },
-  { src: "/images/Generale/PXL_20250426_185158011.jpg" },
-  { src: "/images/Generale/PXL_20250601_163148263.jpg" },
-  { src: "/images/Generale/PXL_20250914_100048260.PORTRAIT.jpg" },
-  { src: "/images/Generale/PXL_20250928_084839734.jpg" },
-  { src: "/images/Generale/PXL_20250928_090029265.jpg" },
-  { src: "/images/Generale/PXL_20251109_090820115.PORTRAIT.ORIGINAL.jpg" },
-  { src: "/images/Generale/PXL_20251109_112648076.PORTRAIT.jpg" },
-  { src: "/images/Generale/PXL_20251130_090459880.jpg" }
+  { src: `${BASE_URL}images/Generale/PXL_20250405_195217346.jpg` },
+  { src: `${BASE_URL}images/Generale/PXL_20250412_164521498.jpg` },
+  { src: `${BASE_URL}images/Generale/PXL_20250426_185158011.jpg` },
+  { src: `${BASE_URL}images/Generale/PXL_20250601_163148263.jpg` },
+  { src: `${BASE_URL}images/Generale/PXL_20250914_100048260.PORTRAIT.jpg` },
+  { src: `${BASE_URL}images/Generale/PXL_20250928_084839734.jpg` },
+  { src: `${BASE_URL}images/Generale/PXL_20250928_090029265.jpg` },
+  { src: `${BASE_URL}images/Generale/PXL_20251109_090820115.PORTRAIT.ORIGINAL.jpg` },
+  { src: `${BASE_URL}images/Generale/PXL_20251109_112648076.PORTRAIT.jpg` },
+  { src: `${BASE_URL}images/Generale/PXL_20251130_090459880.jpg` }
 ];
 
 const breakpointColumnsObj = {
