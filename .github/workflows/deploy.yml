@@ -20,6 +20,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Skip se il commit è fatto dal bot (evita loop)
+    if: "!contains(github.event.head_commit.message, '🤖 Auto-update')"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
