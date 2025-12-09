@@ -53,7 +53,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <Router>
+      <Router basename="/chiesa-fiume-vita">
         <ScrollToTop />
         <div className="App">
           <Header scrolled={scrolled} />
