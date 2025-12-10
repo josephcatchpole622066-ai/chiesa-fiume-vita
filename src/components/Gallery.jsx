@@ -3,17 +3,18 @@ import "./Gallery.css";
 
 function Gallery() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const baseUrl = import.meta.env.BASE_URL;
   const allImages = [
-    "/images/Generale/PXL_20250405_195217346.jpg",
-    "/images/Generale/PXL_20250412_164521498.jpg",
-    "/images/Generale/PXL_20250426_185158011.jpg",
-    "/images/Generale/PXL_20250601_163148263.jpg",
-    "/images/Generale/PXL_20250914_100048260.PORTRAIT.jpg",
-    "/images/Generale/PXL_20250928_084839734.jpg",
-    "/images/Generale/PXL_20250928_090029265.jpg",
-    "/images/Generale/PXL_20251109_090820115.PORTRAIT.ORIGINAL.jpg",
-    "/images/Generale/PXL_20251109_112648076.PORTRAIT.jpg",
-    "/images/Generale/PXL_20251130_090459880.jpg"
+    `${baseUrl}images/Generale/PXL_20250405_195217346.jpg`,
+    `${baseUrl}images/Generale/PXL_20250412_164521498.jpg`,
+    `${baseUrl}images/Generale/PXL_20250426_185158011.jpg`,
+    `${baseUrl}images/Generale/PXL_20250601_163148263.jpg`,
+    `${baseUrl}images/Generale/PXL_20250914_100048260.PORTRAIT.jpg`,
+    `${baseUrl}images/Generale/PXL_20250928_084839734.jpg`,
+    `${baseUrl}images/Generale/PXL_20250928_090029265.jpg`,
+    `${baseUrl}images/Generale/PXL_20251109_090820115.PORTRAIT.ORIGINAL.jpg`,
+    `${baseUrl}images/Generale/PXL_20251109_112648076.PORTRAIT.jpg`,
+    `${baseUrl}images/Generale/PXL_20251130_090459880.jpg`
   ];
   const DISPLAY_COUNT = 9;
   const [displayImages, setDisplayImages] = useState(allImages.slice(0, DISPLAY_COUNT));

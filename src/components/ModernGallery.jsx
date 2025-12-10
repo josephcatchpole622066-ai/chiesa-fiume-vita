@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import Gallery from "react-photo-gallery";
 import Carousel, { Modal, ModalGateway } from "react-images";
 
+const baseUrl = import.meta.env.BASE_URL;
 const allImages = [
-  { src: "/images/Generale/PXL_20250405_195217346.jpg", width: 1, height: 1 },
-  { src: "/images/Generale/PXL_20250412_164521498.jpg", width: 1, height: 1 },
-  { src: "/images/Generale/PXL_20250426_185158011.jpg", width: 1, height: 1 },
-  { src: "/images/Generale/PXL_20250601_163148263.jpg", width: 1, height: 1 },
-  { src: "/images/Generale/PXL_20250914_100048260.PORTRAIT.jpg", width: 1, height: 1 },
-  { src: "/images/Generale/PXL_20250928_084839734.jpg", width: 1, height: 1 },
-  { src: "/images/Generale/PXL_20250928_090029265.jpg", width: 1, height: 1 },
-  { src: "/images/Generale/PXL_20251109_090820115.PORTRAIT.ORIGINAL.jpg", width: 1, height: 1 },
-  { src: "/images/Generale/PXL_20251109_112648076.PORTRAIT.jpg", width: 1, height: 1 },
-  { src: "/images/Generale/PXL_20251130_090459880.jpg", width: 1, height: 1 }
+  { src: `${baseUrl}images/Generale/PXL_20250405_195217346.jpg`, width: 1, height: 1 },
+  { src: `${baseUrl}images/Generale/PXL_20250412_164521498.jpg`, width: 1, height: 1 },
+  { src: `${baseUrl}images/Generale/PXL_20250426_185158011.jpg`, width: 1, height: 1 },
+  { src: `${baseUrl}images/Generale/PXL_20250601_163148263.jpg`, width: 1, height: 1 },
+  { src: `${baseUrl}images/Generale/PXL_20250914_100048260.PORTRAIT.jpg`, width: 1, height: 1 },
+  { src: `${baseUrl}images/Generale/PXL_20250928_084839734.jpg`, width: 1, height: 1 },
+  { src: `${baseUrl}images/Generale/PXL_20250928_090029265.jpg`, width: 1, height: 1 },
+  { src: `${baseUrl}images/Generale/PXL_20251109_090820115.PORTRAIT.ORIGINAL.jpg`, width: 1, height: 1 },
+  { src: `${baseUrl}images/Generale/PXL_20251109_112648076.PORTRAIT.jpg`, width: 1, height: 1 },
+  { src: `${baseUrl}images/Generale/PXL_20251130_090459880.jpg`, width: 1, height: 1 }
 ];
 
 function ModernGallery() {
