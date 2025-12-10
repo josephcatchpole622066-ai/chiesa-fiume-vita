@@ -18,7 +18,8 @@ function TestimonialsDynamic() {
       setError(null);
       
       // Carica le testimonianze dal file JSON statico
-      const response = await fetch('/data/testimonials.json');
+      const baseUrl = import.meta.env.BASE_URL;
+      const response = await fetch(`${baseUrl}data/testimonials.json`);
       if (!response.ok) {
         throw new Error('Failed to load testimonials data');
       }

@@ -6,7 +6,8 @@ const LatestSermon = () => {
   const [latestSermon, setLatestSermon] = useState(null);
 
   useEffect(() => {
-    fetch('/data/sermons.json')
+    const baseUrl = import.meta.env.BASE_URL;
+    fetch(`${baseUrl}data/sermons.json`)
       .then(response => response.json())
       .then(data => {
         if (data && data.length > 0) {

@@ -32,7 +32,8 @@ function TestimonialDetailDynamic() {
       setLoading(true);
 
       // Carica i dati dal file JSON statico
-      const response = await fetch('/data/all-videos.json');
+      const baseUrl = import.meta.env.BASE_URL;
+      const response = await fetch(`${baseUrl}data/all-videos.json`);
       if (!response.ok) {
         throw new Error('Failed to load videos data');
       }
@@ -75,7 +76,7 @@ function TestimonialDetailDynamic() {
         });
         
         // Carica altre testimonianze dal JSON
-        const testimonialsResponse = await fetch('/data/testimonials.json');
+        const testimonialsResponse = await fetch(`${baseUrl}data/testimonials.json`);
         if (testimonialsResponse.ok) {
           const allTestimonialsData = await testimonialsResponse.json();
           const otherTestimonials = allTestimonialsData

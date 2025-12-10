@@ -22,7 +22,8 @@ function SermonsDynamic() {
       setError(null);
 
       // Carica i video dal file JSON statico
-      const response = await fetch('/data/sermons.json');
+      const baseUrl = import.meta.env.BASE_URL;
+      const response = await fetch(`${baseUrl}data/sermons.json`);
       if (!response.ok) {
         throw new Error('Failed to load sermons data');
       }
