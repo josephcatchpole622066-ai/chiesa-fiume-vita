@@ -7,8 +7,7 @@
   color: var(--white);
   text-align: center;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
-              url('https://images.unsplash.com/photo-1693952357486-8a01b9a46551?q=100&w=2400&auto=format&fit=crop') center/cover;
+  background: #000 url('https://images.unsplash.com/photo-1693952357486-8a01b9a46551?q=100&w=2400&auto=format&fit=crop') center/cover;
 }
 
 .hero-video {
@@ -22,16 +21,12 @@
   transform: translate(-50%, -50%);
   z-index: 0;
   object-fit: cover;
+  filter: saturate(1.1) contrast(1.05);
 }
 
+/* Overlay nero trasparente - aggiornato */
 .hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3));
-  z-index: 1;
+  display: none;
 }
 
 .hero::before {
