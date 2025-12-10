@@ -17,12 +17,13 @@
 # - Aiuto Bisognosi/
 # - Inglese/
 # - Generale/  (per la gallery homepage)
+# - Video/  (video di sfondo per la homepage)
 
 param(
     [Parameter(Mandatory=$true)]
     [string]$SourcePath,
     
-    [string]$ProjectRoot = "c:\Users\LENOVO\Josiah Catchpole\devSito\chiesa-fiume-vita"
+    [string]$ProjectRoot = "c:\Users\joseph.catchpole\chiesa-new"
 )
 
 Write-Host "`n========================================" -ForegroundColor Cyan
@@ -60,6 +61,33 @@ New-Item -ItemType Directory -Force -Path $galleriesPath | Out-Null
 
 $photosByMinistry = @{}
 $totalPhotos = 0
+$videoProcessed = $false
+
+# Processa video di sfondo (se presente)
+$videoSourcePath = Join-Path $SourcePath "Video"
+if (Test-Path $videoSourcePath) {
+    Write-Host "Processando video di sfondo..." -ForegroundColor Cyan
+    
+    $videos = Get-ChildItem -Path $videoSourcePath -File -Include *.mp4,*.webm,*.mov,*.MP4,*.WEBM,*.MOV -Recurse
+    
+    if ($videos.Count -gt 0) {
+        # Prendi il primo video trovato
+        $video = $videos[0]
+        
+        # Crea cartella video se non esiste
+        $videoDestFolder = Join-Path $ProjectRoot "public\videos"
+        New-Item -ItemType Directory -Force -Path $videoDestFolder | Out-Null
+        
+        # Copia con nome standardizzato
+        $videoDestPath = Join-Path $videoDestFolder "hero-background.mp4"
+        Copy-Item -Path $video.FullName -Destination $videoDestPath -Force
+        
+        Write-Host "  Video copiato: $($video.Name) -> hero-background.mp4" -ForegroundColor Green
+        $videoProcessed = $true
+    } else {
+        Write-Host "  Nessun video trovato nella cartella Video" -ForegroundColor Yellow
+    }
+}
 
 # Processa ogni cartella
 foreach ($folderName in $ministryMapping.Keys) {
@@ -188,6 +216,9 @@ Write-Host "Riepilogo:" -ForegroundColor Cyan
 Write-Host "  - Foto totali copiate: $totalPhotos" -ForegroundColor White
 Write-Host "  - Ministeri aggiornati: $($photosByMinistry.Keys.Count)" -ForegroundColor White
 Write-Host "  - Cartella destinazione: $galleriesPath" -ForegroundColor White
+if ($videoProcessed) {
+    Write-Host "  - Video di sfondo: hero-background.mp4" -ForegroundColor Green
+}
 
 Write-Host "`nProssimi passi:" -ForegroundColor Yellow
 Write-Host "  1. Testa il sito: npm run dev" -ForegroundColor White

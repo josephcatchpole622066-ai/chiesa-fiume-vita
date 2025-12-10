@@ -41,7 +41,59 @@ async function main() {
   }
   const IMAGES_DIR = path.join(PUBLIC_DIR, "images");
   if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR);
+
+  const VIDEOS_DIR = path.join(PUBLIC_DIR, "videos");
+  if (!fs.existsSync(VIDEOS_DIR)) fs.mkdirSync(VIDEOS_DIR);
+
   for (const folder of folders) {
+    // Se è la cartella Video, scarica in public/videos
+    if (folder.name.toLowerCase() === "video") {
+      console.log(`\n🎥 Processing video folder: ${folder.name}`);
+
+      // Lista tutti i video in questa cartella
+      const videoRes = await drive.files.list({
+        q: `'${folder.id}' in parents and mimeType contains 'video/' and trashed = false`,
+        fields: "files(id, name, mimeType)",
+        pageSize: 1000,
+      });
+      const videos = videoRes.data.files;
+
+      if (!videos || videos.length === 0) {
+        console.log(`No videos found in folder ${folder.name}`);
+      } else {
+        // Prendi il primo video e salvalo come hero-background.mp4
+        const file = videos[0];
+        const destPath = path.join(VIDEOS_DIR, "hero-background.mp4");
+        const dest = fs.createWriteStream(destPath);
+        console.log(`Downloading ${file.name} as hero-background.mp4...`);
+
+        await drive.files
+          .get(
+            {
+              fileId: file.id,
+              alt: "media",
+            },
+            { responseType: "stream" }
+          )
+          .then((res) => {
+            return new Promise((resolve, reject) => {
+              res.data
+                .on("end", () => {
+                  console.log(`✅ Downloaded: hero-background.mp4`);
+                  resolve();
+                })
+                .on("error", (err) => {
+                  console.error(`Error downloading ${file.name}:`, err);
+                  reject(err);
+                })
+                .pipe(dest);
+            });
+          });
+      }
+      continue; // Salta il resto del ciclo per la cartella Video
+    }
+
+    // Processa cartelle immagini normalmente
     const localFolder = path.join(IMAGES_DIR, folder.name);
     if (!fs.existsSync(localFolder)) fs.mkdirSync(localFolder);
     console.log(`\n📁 Processing folder: ${folder.name}`);
@@ -84,7 +136,7 @@ async function main() {
         });
     }
   }
-  console.log("\n✅ All images downloaded to /public/images");
+  console.log("\n✅ All images and videos downloaded to /public");
 }
 
 main().catch((err) => {

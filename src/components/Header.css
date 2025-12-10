@@ -5,8 +5,8 @@
   width: 100%;
   z-index: 1000;
   transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  background: transparent;
+  box-shadow: none;
 }
 
 .header.scrolled {
@@ -23,11 +23,18 @@
 
 .logo h1 {
   font-size: 1.8rem;
-  color: var(--primary-color);
+  color: white;
   font-weight: 700;
   display: flex;
   align-items: center;
   gap: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.header.scrolled .logo h1 {
+  color: var(--primary-color);
+  text-shadow: none;
 }
 
 .nav-links {
@@ -38,7 +45,7 @@
 }
 
 .nav-links li a {
-  color: var(--text-dark);
+  color: white;
   font-weight: 500;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -48,12 +55,18 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header.scrolled .nav-links li a {
+  color: var(--text-dark);
+  text-shadow: none;
 }
 
 .nav-links li button.logout-link {
   background: none;
   border: none;
-  color: var(--text-dark);
+  color: white;
   font-weight: 500;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -65,6 +78,12 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header.scrolled .nav-links li button.logout-link {
+  color: var(--text-dark);
+  text-shadow: none;
 }
 
 .nav-links li .login-link {
@@ -114,13 +133,19 @@
 }
 
 .dropdown-trigger {
-  color: var(--text-dark);
+  color: white;
   font-weight: 500;
   font-size: 1rem;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header.scrolled .dropdown-trigger {
+  color: var(--text-dark);
+  text-shadow: none;
 }
 
 .dropdown-arrow {

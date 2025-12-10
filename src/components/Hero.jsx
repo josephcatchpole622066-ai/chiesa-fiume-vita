@@ -5,6 +5,16 @@ import "./Hero.css";
 function Hero() {
   return (
     <section id="home" className="hero">
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline
+        className="hero-video"
+      >
+        <source src="/chiesa-fiume-vita/videos/hero-background.mp4" type="video/mp4" />
+      </video>
+      <div className="hero-overlay"></div>
       <div className="hero-content">
         <p className="hero-subtitle-small fade-in-up">CHIESA FIUME DI VITA</p>
         <h1 className="hero-title fade-in-up">Amare Dio e servire Cristo a Pozzuoli</h1>
