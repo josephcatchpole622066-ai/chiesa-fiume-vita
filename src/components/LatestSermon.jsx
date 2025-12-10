@@ -40,7 +40,7 @@ const LatestSermon = () => {
             <h3>{latestSermon.mainTitle}</h3>
             <div className="sermon-meta">
               <span className="preacher">👤 {latestSermon.preacher}</span>
-              <span className="scripture">📖 {latestSermon.scripture}</span>
+              <span className="scripture">📖 {latestSermon.scripture || 'Vari brani'}</span>
               <span className="date">📅 {new Date(latestSermon.publishedAt).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
             </div>
             <p className="sermon-description">{latestSermon.description}</p>

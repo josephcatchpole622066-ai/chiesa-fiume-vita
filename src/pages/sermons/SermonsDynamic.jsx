@@ -228,13 +228,12 @@ function SermonsDynamic() {
                 <div className="sermon-title-row" style={{display:'flex',flexDirection:'column',alignItems:'flex-start',gap:'2px'}}>
                   <h3 className="sermon-title" style={{margin:0}}>{sermon.mainTitle}</h3>
                   <div className="sermon-details" style={{display:'flex',flexDirection:'row',alignItems:'center',gap:'8px'}}>
-                    {sermon.scripture && <span className="sermon-scripture highlight-scripture">📖 {sermon.scripture}</span>}
+                    <span className="sermon-scripture highlight-scripture">📖 {sermon.scripture || 'Vari brani'}</span>
                     {sermon.preacher && <span className="sermon-preacher">🎤 {sermon.preacher}</span>}
                   </div>
                 </div>
                 <div className="sermon-meta">
                   <span className="sermon-date">📅 {formatDate(sermon.publishedAt)}</span>
-                  {sermon.views > 0 && <span className="sermon-views">👁️ {sermon.views.toLocaleString()}</span>}
                 </div>
               </div>
             </Link>

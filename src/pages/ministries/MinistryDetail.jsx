@@ -243,10 +243,9 @@ const MinistryDetail = () => {
         className="ministry-detail-hero" 
         style={{ 
           '--hero-color': ministry.color,
-          backgroundImage: ministry.image ? `url(${ministry.image})` : 'none'
+          backgroundImage: ministry.image ? `url("${ministry.image}")` : 'none'
         }}
       >
-        <div className="hero-overlay"></div>
         {ministry.image && <div className="hero-image-overlay"></div>}
         <div className="container hero-content">
           <button onClick={() => navigate('/ministeri')} className="back-button">
