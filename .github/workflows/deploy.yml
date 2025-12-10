@@ -53,10 +53,21 @@ jobs:
 
       - name: Copy images to dist
         run: |
+          echo "Checking public/images directory..."
+          ls -la public/images/ || echo "public/images not found"
+          echo "Creating dist/images directory..."
           mkdir -p dist/images
-          cp -r public/images/* dist/images/ || true
-          echo "Images copied to dist/images"
+          echo "Copying images..."
+          if [ -d "public/images" ]; then
+            cp -r public/images/* dist/images/
+            echo "Images copied successfully"
+          else
+            echo "ERROR: public/images directory does not exist!"
+          fi
+          echo "Contents of dist/images:"
           ls -la dist/images/
+          echo "Contents of dist/images/Generale:"
+          ls -la dist/images/Generale/ || echo "dist/images/Generale not found"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
