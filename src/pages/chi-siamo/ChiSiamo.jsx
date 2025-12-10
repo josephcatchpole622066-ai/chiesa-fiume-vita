@@ -1,9 +1,56 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import getImagePath from '../../utils/imagePaths';
 import './ChiSiamo.css';
 
 const ChiSiamo = () => {
+  const timelineRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!timelineRef.current) return;
+
+      const timeline = timelineRef.current;
+      const timelineRect = timeline.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calcola quanto della timeline è visibile
+      const timelineTop = timelineRect.top;
+      const timelineHeight = timelineRect.height;
+      
+      // Calcola la percentuale di scroll
+      let scrollProgress = 0;
+      
+      if (timelineTop < windowHeight && timelineTop + timelineHeight > 0) {
+        const visibleTop = Math.max(0, windowHeight - timelineTop);
+        const visibleHeight = Math.min(timelineHeight, visibleTop);
+        scrollProgress = (visibleHeight / timelineHeight) * 100;
+      }
+      
+      // Applica la percentuale alla linea
+      const timelineLine = timeline.querySelector('.timeline-line-progress');
+      if (timelineLine) {
+        timelineLine.style.height = `${Math.min(scrollProgress, 100)}%`;
+      }
+
+      // Anima i marker e il contenuto
+      const items = timeline.querySelectorAll('.timeline-item');
+      items.forEach((item, index) => {
+        const itemRect = item.getBoundingClientRect();
+        const itemCenter = itemRect.top + itemRect.height / 2;
+        
+        if (itemCenter < windowHeight * 0.8) {
+          item.classList.add('visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Esegui al mount
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="chi-siamo-page">
       {/* Hero */}
@@ -26,7 +73,8 @@ const ChiSiamo = () => {
                 nella fede cristiana.
               </p>
               
-              <div className="timeline">
+              <div className="timeline" ref={timelineRef}>
+                <div className="timeline-line-progress"></div>
                 <div className="timeline-item">
                   <div className="timeline-marker"></div>
                   <div className="timeline-content">

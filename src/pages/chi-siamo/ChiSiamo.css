@@ -85,12 +85,31 @@
   top: 0;
   bottom: 0;
   width: 3px;
+  background: #e0e0e0;
+}
+
+.timeline-line-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 0%;
   background: linear-gradient(to bottom, #667eea, #764ba2);
+  transition: height 0.1s linear;
+  z-index: 1;
 }
 
 .timeline-item {
   position: relative;
   margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .timeline-marker {
@@ -99,10 +118,19 @@
   top: 5px;
   width: 16px;
   height: 16px;
-  background: #667eea;
+  background: white;
   border-radius: 50%;
-  border: 3px solid white;
+  border: 3px solid #e0e0e0;
+  box-shadow: 0 0 0 3px transparent;
+  transition: all 0.4s ease;
+  z-index: 2;
+}
+
+.timeline-item.visible .timeline-marker {
+  background: #667eea;
+  border-color: white;
   box-shadow: 0 0 0 3px #667eea;
+  transform: scale(1.2);
 }
 
 .timeline-content h3 {
