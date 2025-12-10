@@ -5,6 +5,12 @@
   width: 100%;
   z-index: 1000;
   transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Homepage - trasparente all'inizio */
+.header.homepage {
   background: transparent;
   box-shadow: none;
 }
@@ -23,16 +29,21 @@
 
 .logo h1 {
   font-size: 1.8rem;
-  color: white;
+  color: var(--primary-color);
   font-weight: 700;
   display: flex;
   align-items: center;
   gap: 10px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: none;
   transition: all 0.3s ease;
 }
 
-.header.scrolled .logo h1 {
+.header.homepage .logo h1 {
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header.homepage.scrolled .logo h1 {
   color: var(--primary-color);
   text-shadow: none;
 }
@@ -45,7 +56,7 @@
 }
 
 .nav-links li a {
-  color: white;
+  color: var(--text-dark);
   font-weight: 500;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -55,10 +66,15 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  text-shadow: none;
+}
+
+.header.homepage .nav-links li a {
+  color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.header.scrolled .nav-links li a {
+.header.homepage.scrolled .nav-links li a {
   color: var(--text-dark);
   text-shadow: none;
 }
@@ -66,7 +82,7 @@
 .nav-links li button.logout-link {
   background: none;
   border: none;
-  color: white;
+  color: var(--text-dark);
   font-weight: 500;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -78,10 +94,15 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  text-shadow: none;
+}
+
+.header.homepage .nav-links li button.logout-link {
+  color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.header.scrolled .nav-links li button.logout-link {
+.header.homepage.scrolled .nav-links li button.logout-link {
   color: var(--text-dark);
   text-shadow: none;
 }
@@ -133,17 +154,22 @@
 }
 
 .dropdown-trigger {
-  color: white;
+  color: var(--text-dark);
   font-weight: 500;
   font-size: 1rem;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 5px;
+  text-shadow: none;
+}
+
+.header.homepage .dropdown-trigger {
+  color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.header.scrolled .dropdown-trigger {
+.header.homepage.scrolled .dropdown-trigger {
   color: var(--text-dark);
   text-shadow: none;
 }

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import "./Header.css";
 
-function Header({ scrolled }) {
+function Header({ scrolled, isHomePage }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [contenutiOpen, setContenutiOpen] = useState(false);
   const { isAuthenticated, user, logout } = useAuth();
@@ -24,7 +24,7 @@ function Header({ scrolled }) {
   };
 
   return (
-    <header className={`header ${scrolled ? "scrolled" : ""}`}>
+    <header className={`header ${scrolled ? "scrolled" : ""} ${isHomePage ? "homepage" : ""}`}>
       <div className="container">
         <nav className="nav">
           <div className="logo">

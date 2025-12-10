@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -44,8 +44,10 @@ function HomePage() {
   );
 }
 
-function App() {
+function AppContent() {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,11 +59,8 @@ function App() {
   }, []);
 
   return (
-    <AuthProvider>
-      <Router basename={import.meta.env.BASE_URL}>
-        <ScrollToTop />
-        <div className="App">
-          <Header scrolled={scrolled} />
+    <div className="App">
+      <Header scrolled={scrolled} isHomePage={isHomePage} />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/events/:eventId" element={<EventDetail />} />
@@ -106,6 +105,15 @@ function App() {
           </Routes>
           <Footer />
         </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router basename={import.meta.env.BASE_URL}>
+        <ScrollToTop />
+        <AppContent />
       </Router>
     </AuthProvider>
   );
