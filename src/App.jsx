@@ -58,7 +58,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <ScrollToTop />
         <div className="App">
           <Header scrolled={scrolled} />

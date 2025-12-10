@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - master
+  schedule:
+    - cron: "0 0 * * 2" # Ogni martedì a mezzanotte
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -18,6 +20,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Skip se il commit è fatto dal bot (evita loop)
+    if: "!contains(github.event.head_commit.message, '🤖 Auto-update')"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,8 +34,29 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
+      - name: Fetch YouTube videos data
+        env:
+          VITE_YOUTUBE_API_KEY: ${{ secrets.VITE_YOUTUBE_API_KEY }}
+        run: node scripts/fetch-videos.js
+
+      - name: Download images from Google Drive
+        env:
+          GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+        run: node scripts/download-drive-images.js || true
+
+      - name: Build with correct BASE_URL
+        env:
+          NODE_ENV: production
         run: npm run build
+
+      - name: Copy images to dist
+        run: |
+          mkdir -p dist/images
+          cp -r public/images/* dist/images/ || true
+          echo "Images copied to dist/images"
+          ls -la dist/images/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

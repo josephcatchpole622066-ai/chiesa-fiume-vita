@@ -28,9 +28,9 @@
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
-  transition: transform 0.5s, opacity 0.4s;
+  transition: transform 0.5s, opacity 1.2s linear;
   opacity: 1;
-  transition: opacity 1.2s linear;
+}
 
 .gallery-item.fade img {
   opacity: 0;
