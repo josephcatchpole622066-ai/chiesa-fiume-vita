@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import SiteStatistics from './SiteStatistics';
 import './AdminDashboard.css';
 
 function AdminDashboard() {
@@ -39,6 +40,9 @@ function AdminDashboard() {
             <p>Crea e modifica eventi della chiesa</p>
           </Link>
         </div>
+
+        {/* Sezione Statistiche */}
+        <SiteStatistics />
 
         <div className="admin-actions">
           <button onClick={logout} className="logout-btn">

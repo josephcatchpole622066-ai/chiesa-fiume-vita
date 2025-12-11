@@ -29,3 +29,6 @@ dist-ssr
 scripts/credentials.json
 scripts/token.json
 temp-drive-download/
+
+# Media files scaricati dal Drive (troppo grandi per git)
+public/videos/

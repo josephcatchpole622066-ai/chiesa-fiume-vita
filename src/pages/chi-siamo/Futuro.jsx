@@ -1,9 +1,57 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Futuro.css';
 
 const Futuro = () => {
   const timelineRef = useRef(null);
+  const [images, setImages] = useState({ c1: null, c2: null, c3: null });
+  const [heroVideo, setHeroVideo] = useState(null);
+  const baseUrl = import.meta.env.BASE_URL;
+
+  // Carica immagini e video dalla cartella "Il futuro"
+  useEffect(() => {
+    const loadMedia = async () => {
+      try {
+        // Carica video per hero
+        const videoUrl = `${baseUrl}videos/hero-background.mp4`;
+        setHeroVideo(videoUrl);
+
+        // Carica le immagini c1, c2, c3 dalla cartella "Il futuro"
+        const folderPath = `${baseUrl}images/Il futuro/`;
+        
+        // Cerca le immagini con pattern c1, c2, c3
+        const imagePatterns = {
+          c1: null,
+          c2: null,
+          c3: null
+        };
+
+        // Prova diverse estensioni comuni
+        const extensions = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
+        
+        for (const [key] of Object.entries(imagePatterns)) {
+          for (const ext of extensions) {
+            try {
+              const testUrl = `${folderPath}${key}.${ext}`;
+              const response = await fetch(testUrl, { method: 'HEAD' });
+              if (response.ok) {
+                imagePatterns[key] = testUrl;
+                break;
+              }
+            } catch (err) {
+              // Ignora errori, prova prossima estensione
+            }
+          }
+        }
+
+        setImages(imagePatterns);
+      } catch (error) {
+        console.error('Errore caricamento media:', error);
+      }
+    };
+
+    loadMedia();
+  }, [baseUrl]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,8 +96,19 @@ const Futuro = () => {
 
   return (
     <div className="futuro-page">
-      {/* Hero Section */}
+      {/* Hero Section con Video */}
       <section className="futuro-hero">
+        {heroVideo && (
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className="hero-video"
+          >
+            <source src={heroVideo} type="video/mp4" />
+          </video>
+        )}
         <div className="hero-overlay"></div>
         <div className="container hero-content">
           <h1 className="hero-title">Il Nostro Futuro</h1>
@@ -118,24 +177,16 @@ const Futuro = () => {
               <div className="phase-marker"></div>
               <div className="phase-content">
                 <span className="phase-status">Completato</span>
-                <h3>Fase 1: Visione e Pianificazione</h3>
-                <p className="phase-date">2023</p>
-                <p>
-                  Definizione della visione, studi di fattibilità e progettazione 
-                  iniziale con architetti e ingegneri.
-                </p>
-              </div>
-            </div>
-
-            <div className="future-phase-item completed">
-              <div className="phase-marker"></div>
-              <div className="phase-content">
-                <span className="phase-status">Completato</span>
-                <h3>Fase 2: Acquisizione Terreno</h3>
+                <h3>Fase 1: Struttura per il Massetto</h3>
                 <p className="phase-date">2024</p>
+                {images.c1 && (
+                  <div className="phase-image">
+                    <img src={images.c1} alt="Struttura per il massetto" />
+                  </div>
+                )}
                 <p>
-                  Identificazione e acquisizione del terreno ideale per la costruzione 
-                  del nuovo edificio.
+                  Realizzazione della struttura di base e preparazione del terreno 
+                  per la posa del massetto.
                 </p>
               </div>
             </div>
@@ -144,11 +195,34 @@ const Futuro = () => {
               <div className="phase-marker"></div>
               <div className="phase-content">
                 <span className="phase-status">In Corso</span>
-                <h3>Fase 3: Permessi e Progettazione Definitiva</h3>
+                <h3>Fase 2: Il Massetto</h3>
                 <p className="phase-date">2025</p>
+                {images.c2 && (
+                  <div className="phase-image">
+                    <img src={images.c2} alt="Il massetto" />
+                  </div>
+                )}
                 <p>
-                  Ottenimento dei permessi di costruzione e finalizzazione dei 
-                  progetti esecutivi.
+                  Posa del massetto e livellamento delle superfici per la 
+                  costruzione della struttura principale.
+                </p>
+              </div>
+            </div>
+
+            <div className="future-phase-item">
+              <div className="phase-marker"></div>
+              <div className="phase-content">
+                <span className="phase-status">Pianificato</span>
+                <h3>Fase 3: Struttura della Chiesa</h3>
+                <p className="phase-date">2026</p>
+                {images.c3 && (
+                  <div className="phase-image">
+                    <img src={images.c3} alt="Struttura della chiesa" />
+                  </div>
+                )}
+                <p>
+                  Costruzione della struttura portante della chiesa e 
+                  innalzamento delle pareti principali.
                 </p>
               </div>
             </div>

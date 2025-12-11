@@ -46,6 +46,82 @@ async function main() {
   if (!fs.existsSync(VIDEOS_DIR)) fs.mkdirSync(VIDEOS_DIR);
 
   for (const folder of folders) {
+    // Se è la cartella "Il futuro", scarica video e immagini
+    if (folder.name === "Il futuro") {
+      console.log(`\n🏗️ Processing "Il futuro" folder: ${folder.name}`);
+
+      // Lista tutti i file (video e immagini) in questa cartella
+      const filesRes = await drive.files.list({
+        q: `'${folder.id}' in parents and trashed = false`,
+        fields: "files(id, name, mimeType)",
+        pageSize: 1000,
+      });
+      const files = filesRes.data.files;
+
+      if (!files || files.length === 0) {
+        console.log(`No files found in folder ${folder.name}`);
+      } else {
+        // Separa video e immagini
+        const videos = files.filter(f => f.mimeType.includes('video/'));
+        const images = files.filter(f => f.mimeType.includes('image/'));
+
+        // Scarica il video come hero-background.mp4
+        if (videos.length > 0) {
+          const videoFile = videos[0];
+          const destPath = path.join(VIDEOS_DIR, "hero-background.mp4");
+          const dest = fs.createWriteStream(destPath);
+          console.log(`📹 Downloading video ${videoFile.name} as hero-background.mp4...`);
+
+          await drive.files
+            .get({ fileId: videoFile.id, alt: "media" }, { responseType: "stream" })
+            .then((res) => {
+              return new Promise((resolve, reject) => {
+                res.data
+                  .on("end", () => {
+                    console.log(`✅ Downloaded video: hero-background.mp4`);
+                    resolve();
+                  })
+                  .on("error", (err) => {
+                    console.error(`Error downloading ${videoFile.name}:`, err);
+                    reject(err);
+                  })
+                  .pipe(dest);
+              });
+            });
+        }
+
+        // Scarica le immagini nella cartella images/Il futuro
+        if (images.length > 0) {
+          const localFolder = path.join(IMAGES_DIR, folder.name);
+          if (!fs.existsSync(localFolder)) fs.mkdirSync(localFolder);
+
+          for (const file of images) {
+            const destPath = path.join(localFolder, file.name);
+            const dest = fs.createWriteStream(destPath);
+            console.log(`🖼️ Downloading image ${file.name}...`);
+
+            await drive.files
+              .get({ fileId: file.id, alt: "media" }, { responseType: "stream" })
+              .then((res) => {
+                return new Promise((resolve, reject) => {
+                  res.data
+                    .on("end", () => {
+                      console.log(`✅ Downloaded: ${file.name}`);
+                      resolve();
+                    })
+                    .on("error", (err) => {
+                      console.error(`Error downloading ${file.name}:`, err);
+                      reject(err);
+                    })
+                    .pipe(dest);
+                });
+              });
+          }
+        }
+      }
+      continue; // Salta il resto del ciclo per la cartella "Il futuro"
+    }
+
     // Se è la cartella Video, scarica in public/videos
     if (folder.name.toLowerCase() === "video") {
       console.log(`\n🎥 Processing video folder: ${folder.name}`);
