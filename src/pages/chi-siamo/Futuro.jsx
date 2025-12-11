@@ -131,12 +131,53 @@ const Futuro = () => {
         </div>
       </section>
 
+      {/* Location Section */}
+      <section className="location-section">
+        <div className="container">
+          <h2>La Posizione</h2>
+          <div className="location-content">
+            <div className="location-info">
+              <div className="location-details">
+                <h3>La Nuova Sede</h3>
+                <p className="location-address">
+                  <strong>Coordinate GPS:</strong><br />
+                  40°50'21.6"N 14°05'50.7"E
+                </p>
+                <p className="location-description">
+                  La nuova chiesa sorgerà in una posizione strategica, facilmente 
+                  raggiungibile e immersa nel cuore della nostra comunità locale.
+                </p>
+                <a 
+                  href="https://www.google.com/maps?q=40.839333,14.097417" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="location-button"
+                >
+                  Apri in Google Maps
+                </a>
+              </div>
+            </div>
+            <div className="location-map">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.234!2d14.097417!3d40.839333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDUwJzIxLjYiTiAxNMKwMDUnNTAuNyJF!5e1!3m2!1sit!2sit!4v1234567890"
+                width="100%"
+                height="450"
+                style={{ border: 0, borderRadius: '12px' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Posizione della nuova chiesa"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Project Vision */}
       <section className="project-vision">
         <div className="container">
           <div className="vision-grid">
             <div className="vision-card">
-              <div className="vision-icon">🏛️</div>
               <h3>Spazio Moderno</h3>
               <p>
                 Un edificio progettato per accogliere la nostra comunità in crescita, 
@@ -145,7 +186,6 @@ const Futuro = () => {
             </div>
             
             <div className="vision-card">
-              <div className="vision-icon">👥</div>
               <h3>Centro Comunitario</h3>
               <p>
                 Uno spazio multifunzionale per eventi, incontri di gruppo, 
@@ -154,7 +194,6 @@ const Futuro = () => {
             </div>
             
             <div className="vision-card">
-              <div className="vision-icon">🌟</div>
               <h3>Casa di Preghiera</h3>
               <p>
                 Un luogo dedicato all'adorazione, alla preghiera e all'insegnamento 

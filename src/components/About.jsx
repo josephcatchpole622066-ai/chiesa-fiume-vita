@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import "./About.css";
 
 function About() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const baseUrl = import.meta.env.BASE_URL;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,55 +34,52 @@ function About() {
     <section id="about" className="about" ref={sectionRef}>
       <div className="container">
         <h2 className="section-title">Chi Siamo</h2>
-        <p className="section-subtitle">
-          Una comunità viva e accogliente nel cuore di Pozzuoli
-        </p>
 
-        <div className="about-content">
-          <div className="about-image">
+        {/* Nuova sezione Benvenuto */}
+        <div className="welcome-section">
+          <div className="welcome-image">
             <img
-              src="https://images.unsplash.com/photo-1545231027-637d2f6210f8?q=80&w=800"
-              alt="Chiesa Pozzuoli"
+              src={`${baseUrl}images/Generale/chiSiamo.jpg`}
+              alt="Chiesa Fiume di Vita"
+              onError={(e) => {
+                e.target.src = "https://images.unsplash.com/photo-1545231027-637d2f6210f8?q=80&w=800";
+              }}
             />
           </div>
 
-          <div className="about-text">
-            <h3>La Nostra Missione</h3>
+          <div className="welcome-text">
+            <h3 className="welcome-title">Benvenuto</h3>
+            <p className="welcome-intro">Siamo lieti di averti qui</p>
+            
             <p>
-              Siamo una comunità cristiana che accoglie tutti con amore e gioia.
-              La nostra chiesa a Pozzuoli è un luogo di preghiera, crescita
-              spirituale e fraternità, dove ogni persona può trovare pace e
-              conforto.
+              Gesù era un uomo semplice con un piano semplice: far conoscere Dio. 
+              Insieme, guardiamo costantemente a Gesù attraverso la Parola di Dio, 
+              ispirati a diventare ciò che Dio richiede, in modo da poter dare speranza 
+              a coloro che ancora non conoscono l'amore straordinario di Dio.
+            </p>
+            
+            <p>
+              Lo facciamo costruendo una comunità radicata nella Bibbia, coltivando 
+              profonde amicizie spirituali e facendo del bene nella nostra comunità.
             </p>
 
-            <div className="features">
-              <div className={`feature ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.1s' }}>
-                <div className="feature-icon">🙏</div>
-                <div className="feature-line"></div>
-                <h4>Preghiera</h4>
-                <p>Momenti di preghiera comunitaria e personale</p>
-              </div>
+            <p>
+              Ci riuniamo la domenica mattina in chiesa e i nostri piccoli gruppi 
+              si incontrano durante la settimana.
+            </p>
 
-              <div className={`feature ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.3s' }}>
-                <div className="feature-icon">❤️</div>
-                <div className="feature-line"></div>
-                <h4>Comunità</h4>
-                <p>Una famiglia accogliente e calorosa</p>
-              </div>
+            <p>
+              Speriamo che ti unirai a noi nella nostra missione di entrare a far 
+              parte della grande storia di Dio.
+            </p>
 
-              <div className={`feature ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.5s' }}>
-                <div className="feature-icon">📖</div>
-                <div className="feature-line"></div>
-                <h4>Studio</h4>
-                <p>Approfondimento della Parola di Dio</p>
-              </div>
-
-              <div className={`feature ${isVisible ? 'animate' : ''}`} style={{ animationDelay: '0.7s' }}>
-                <div className="feature-icon">🤝</div>
-                <div className="feature-line"></div>
-                <h4>Servizio</h4>
-                <p>Aiuto concreto a chi è nel bisogno</p>
-              </div>
+            <div className="welcome-buttons">
+              <Link to="/chi-siamo" className="btn-primary">
+                Chi Siamo
+              </Link>
+              <Link to="/ministeri/chiesa-in-casa" className="btn-secondary">
+                Scopri la Chiesa in Casa
+              </Link>
             </div>
           </div>
         </div>

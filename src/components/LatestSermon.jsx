@@ -23,7 +23,7 @@ const LatestSermon = () => {
     <section className="latest-sermon" id="latest-sermon">
       <div className="container">
         <div className="sermon-header">
-          <h2>🎬 Ultima Predicazione</h2>
+          <h2>Ultima Predicazione</h2>
           <p>Ascolta l'ultima parola condivisa nella nostra comunità</p>
         </div>
 
@@ -40,9 +40,9 @@ const LatestSermon = () => {
           <div className="sermon-info">
             <h3>{latestSermon.mainTitle}</h3>
             <div className="sermon-meta">
-              <span className="preacher">👤 {latestSermon.preacher}</span>
-              <span className="scripture">📖 {latestSermon.scripture || 'Vari brani'}</span>
-              <span className="date">📅 {new Date(latestSermon.publishedAt).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+              <span className="preacher">{latestSermon.preacher}</span>
+              <span className="scripture">{latestSermon.scripture || 'Vari brani'}</span>
+              <span className="date">{new Date(latestSermon.publishedAt).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
             </div>
             <p className="sermon-description">{latestSermon.description}</p>
             
