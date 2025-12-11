@@ -65,12 +65,12 @@ async function main() {
         const videos = files.filter(f => f.mimeType.includes('video/'));
         const images = files.filter(f => f.mimeType.includes('image/'));
 
-        // Scarica il video come hero-background.mp4
+        // Scarica il video come futuro-hero.mp4
         if (videos.length > 0) {
           const videoFile = videos[0];
-          const destPath = path.join(VIDEOS_DIR, "hero-background.mp4");
+          const destPath = path.join(VIDEOS_DIR, "futuro-hero.mp4");
           const dest = fs.createWriteStream(destPath);
-          console.log(`📹 Downloading video ${videoFile.name} as hero-background.mp4...`);
+          console.log(`📹 Downloading video ${videoFile.name} as futuro-hero.mp4...`);
 
           await drive.files
             .get({ fileId: videoFile.id, alt: "media" }, { responseType: "stream" })
@@ -78,7 +78,7 @@ async function main() {
               return new Promise((resolve, reject) => {
                 res.data
                   .on("end", () => {
-                    console.log(`✅ Downloaded video: hero-background.mp4`);
+                    console.log(`✅ Downloaded video: futuro-hero.mp4`);
                     resolve();
                   })
                   .on("error", (err) => {

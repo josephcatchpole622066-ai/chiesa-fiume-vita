@@ -12,8 +12,8 @@ const Futuro = () => {
   useEffect(() => {
     const loadMedia = async () => {
       try {
-        // Carica video per hero
-        const videoUrl = `${baseUrl}videos/hero-background.mp4`;
+        // Carica video specifico per la pagina Il Futuro
+        const videoUrl = `${baseUrl}videos/futuro-hero.mp4`;
         setHeroVideo(videoUrl);
 
         // Carica le immagini c1, c2, c3 dalla cartella "Il futuro"
